@@ -48,13 +48,13 @@
     </ul>
     <?php  if (\tn\phpmvc\Application::isGuest()): ?>
     <div>
-        <a href="" class="bg-dark"> <i class="fas fa-sign-in-alt"></i> Login</a>&nbsp;&nbsp;&nbsp;
+        <a href="/login" class="bg-dark"> <i class="fas fa-sign-in-alt"></i> Login</a>&nbsp;&nbsp;&nbsp;
         <a href="/register" class="bg-dark b"> <i class="fas fa-user-plus"></i> Sign Up</a>
     </div>
     <?php else: ?>
     <div>
-        <a href="" class="bg-dark"> <i class="fas fa-sign-in-alt"></i> Profile</a>&nbsp;&nbsp;&nbsp;
-        <a href="/register" class="bg-dark b"> <i class="fas fa-user-plus"></i> Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
+        <a href="/profile" class="bg-dark"> Profile</a>&nbsp;&nbsp;&nbsp;
+        <a href="/register" class="bg-dark b">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
     </div>
     <?php endif; ?>
 
