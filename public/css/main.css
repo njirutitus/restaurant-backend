@@ -84,7 +84,7 @@ body {
   margin: 0 auto;
 }
 
-.row > *:not(.underline, .form-control) {
+.row > *:not(.underline, .form-group) {
   box-sizing: border-box;
   padding: 10px;
 }
@@ -302,14 +302,12 @@ a {
 }
 
 .item-img {
-  margin-right: 15px;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
 }
 
 .item-description {
-  padding: 5px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -358,7 +356,7 @@ h4 {
   margin: 0 8px;
 }
 
-.form-control {
+.mb-3 {
   margin-bottom: 15px;
 }
 
@@ -374,7 +372,7 @@ h4 {
   margin-right: auto;
 }
 
-.form-input {
+.form-control {
   min-height: 2rem;
   padding: 0.15rem 0.25rem;
   border-radius: 0.25rem;
@@ -382,7 +380,7 @@ h4 {
   border-color: transparent;
 }
 
-.form-input:focus {
+.form-control:focus {
   outline: none !important;
   border-color: transparent;
   box-shadow: 0px 0px 8px 2px #444;
@@ -402,7 +400,7 @@ label {
 }
 
 .is-invalid:focus {
-  box-shadow: 0px 0px 8px 2px red;
+  box-shadow: 0px 0px 8px 2px #444;
 }
 
 .btn {

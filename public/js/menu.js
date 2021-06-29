@@ -73,21 +73,33 @@ const menu = [
   },
 ];
 
+
+
+
 const sectionCenter = document.querySelector(".menu-items");
 const btnContainer = document.querySelector(".btn-container");
 
-window.addEventListener("DOMContentLoaded", function () {
-  displayMenuItems(menu);
-  displayMenuButtons();
+// fetch api
+fetch('/menuitems')
+    .then(response => response.json())
+    .then(menu => {
+      console.log(menu)
+    });
+window.addEventListener("DOMContentLoaded", async function () {
+  await fetch('/menuitems')
+      .then(response => response.json())
+      .then(menu => {
+        console.log(menu)
+        displayMenuItems(menu);
+        displayMenuButtons(menu);
+      });
 });
 
 function displayMenuItems(menuItems) {
   let displayMenu = menuItems.map(function (item) {
-    // console.log(item);
-
     return ` <div class="menu-item row">
     <div class="item-img">
-    <a href=""><img src="${item.img}" alt="${item.title}" /></a>
+    <a href="/menuitem?id=${item.id}"><img src="${item.img}" alt="${item.title}" /></a>
     </div>
     
     <div class="item-description">
@@ -108,7 +120,7 @@ function displayMenuItems(menuItems) {
   sectionCenter.innerHTML = displayMenu;
 }
 
-function displayMenuButtons() {
+function displayMenuButtons(menu) {
   const categories = menu.reduce(
     function (values, item) {
       if (!values.includes(item.category)) {
@@ -118,15 +130,13 @@ function displayMenuButtons() {
     },
     ["all"]
   );
-  const categoryBtns = categories
-    .map(function (category) {
-      return `<button type="button" class="filter-btn" data-id=${category}>
+  btnContainer.innerHTML = categories
+      .map(function (category) {
+        return `<button type="button" class="filter-btn" data-id=${category}>
           ${category}
         </button>`;
-    })
-    .join("");
-
-  btnContainer.innerHTML = categoryBtns;
+      })
+      .join("");
   const filterBtns = btnContainer.querySelectorAll(".filter-btn");
   console.log(filterBtns);
 

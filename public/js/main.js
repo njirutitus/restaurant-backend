@@ -3,7 +3,7 @@ const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("main-content");
 
 function sidebarToggler() {
-  if (sidebar.style.display == "none") {
+  if (sidebar.style.display === "none") {
     sidebar.style.display = "block";
     sidebar.style.zIndex = "99999";
   } else {
