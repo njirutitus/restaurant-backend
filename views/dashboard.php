@@ -36,9 +36,9 @@
           <h1>Dishes</h1>
           <div class="underline"></div>
           <br />
-          <button class="ml-auto btn">
+          <a href="/admin/dishes/add" class="ml-auto btn">
             <i class="fas fa-plus"></i> Add Dish
-          </button>
+          </a>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
