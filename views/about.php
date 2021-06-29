@@ -1,3 +1,6 @@
+<?php
+$this->title = "Home";
+?>
 <!-- Breadcrumb -->
 <div class="breadcrumb row">
     <a href="/">Home</a>

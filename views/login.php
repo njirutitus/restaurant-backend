@@ -3,14 +3,9 @@
 
 use app\models\User;
 
-?>
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="">Sign Up</a>
-</div>
+$this->title = "Login";
 
+?>
 <main class="container">
     <h1>Log in to continue</h1>
 

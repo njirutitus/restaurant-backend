@@ -1,4 +1,6 @@
 <?php
+?>
+<?php
 $this->title = "Menu";
 ?>
 
@@ -6,22 +8,17 @@ $this->title = "Menu";
 <div class="breadcrumb row">
     <a href="/">Home</a>
     <div class="separator">/</div>
-    <a href="">Menu</a>
+    <a href="/menu">Menu</a>
+    <div class="separator">/</div>
+    <a href="">Menu Item</a>
 </div>
 
 <!-- Menu Items -->
 <main class="container">
-    <h1>Popular Menu Items</h1>
+    <h1>Menu Item Details</h1>
 
     <div class="underline"></div>
     <br />
 
-    <!--Filter Buttons Container-->
-    <section class="row btn-container"></section>
-
-    <!-- Dynamic menu container -->
-    <section class="menu-items">
-
-    </section>
 
 </main>

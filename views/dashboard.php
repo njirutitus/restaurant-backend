@@ -1,42 +1,8 @@
 
-
-      <!-- Content-Wrapper -->
-      <main class="content-wrapper" id="main-content">
-        <!-- Top bar -->
-        <nav id="navbar" class="topbar">
-          <button
-            id="sidebarToggleTop"
-            onclick="sidebarToggler();"
-            class="mr-auto"
-          >
-            <i class="fa fa-bars"></i>
-          </button>
-          <div class="dropdown ml-auto">
-            <a href="">Account</a>
-            <div class="dropdown-content">
-              <ul>
-                <li>
-                  <a href=""><i class="fas fa-user"></i> Profile</a>
-                </li>
-                <br />
-                <li>
-                  <a href=""><i class="fas fa-cogs"></i> Change Password</a>
-                </li>
-                <li><hr /></li>
-                <li>
-                  <a href=""><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <!-- Content area -->
-        <article class="content">
           <h1>Dishes</h1>
           <div class="underline"></div>
           <br />
-          <a href="/admin/dishes/add" class="ml-auto btn">
+          <a href="/admin_dishes_add" class="ml-auto btn">
             <i class="fas fa-plus"></i> Add Dish
           </a>
           <div class="table-responsive">
@@ -109,6 +75,5 @@
               </tbody>
             </table>
           </div>
-        </article>
 
 

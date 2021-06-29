@@ -6,8 +6,8 @@
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/admin.css" />
 
     <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
 
@@ -34,8 +34,42 @@
             </li>
         </ul>
     </aside>
+    <!-- Content-Wrapper -->
+    <main class="content-wrapper" id="main-content">
+        <!-- Top bar -->
+        <nav id="navbar" class="topbar">
+            <button
+                    id="sidebarToggleTop"
+                    onclick="sidebarToggler();"
+                    class="mr-auto"
+            >
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="dropdown ml-auto">
+                <a href="">Account</a>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fas fa-user"></i> Profile</a>
+                        </li>
+                        <br />
+                        <li>
+                            <a href=""><i class="fas fa-cogs"></i> Change Password</a>
+                        </li>
+                        <li><hr /></li>
+                        <li>
+                            <a href=""><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content area -->
+        <article class="content">
 
 {{content}}
+        </article>
 
     <!-- Footer -->
     <footer class="footer">

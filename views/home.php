@@ -1,5 +1,5 @@
 <?php
-
+$this->title = "Home";
 ?>
 <main class="container">
     <div class="row row-content highlights-item">

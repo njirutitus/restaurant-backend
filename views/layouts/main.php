@@ -16,9 +16,10 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="./css/main.css" />
+    <script src="https://unpkg.com/htmx.org@1.4.1"></script>
     <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
 
-    <title>Mama Fish Restaurant: Home</title>
+    <title>Mama Fish Restaurant: <?php echo $this->title ?></title>
 </head>
 <body>
 <!-- Navigation bar-->
@@ -54,7 +55,7 @@
     <?php else: ?>
     <div>
         <a href="/profile" class="bg-dark"> Profile</a>&nbsp;&nbsp;&nbsp;
-        <a href="/register" class="bg-dark b">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
+        <a href="/logout" class="bg-dark b">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
     </div>
     <?php endif; ?>
 
@@ -74,6 +75,13 @@
         <a href="/" class="ml-auto btn bg-primary">Make a Reservation</a>
     </div>
 </header>
+<div class="container">
+    <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
+        <div class="alert alert-success">
+            <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
+        </div>
+    <?php endif; ?>
+</div>
 
         {{content}}
 
