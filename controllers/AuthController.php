@@ -24,6 +24,7 @@ class AuthController extends Controller
 
     public function login(Request $request, Response $response)
     {
+        $this->setLayout('auth');
         $loginForm = new LoginForm();
         if($request->isPost()) {
             $loginForm->loadData($request->getBody());
@@ -32,7 +33,6 @@ class AuthController extends Controller
                 return;
             }
         }
-        $this->setLayout('main');
         return $this->render('login',[
             'model' => $loginForm
         ]);
@@ -40,6 +40,7 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
+        $this->setLayout('auth');
         $user = new User();
         if ($request->isPost()) {
             $user->loadData($request->getBody());
@@ -55,7 +56,6 @@ class AuthController extends Controller
             ]);
 
         }
-        $this->setLayout('main');
         return $this->render('register',[
             'model'=> $user
         ]);
@@ -70,7 +70,10 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return $this->render('profile');
+        $user = new User();
+        return $this->render('profile',[
+            'model'=> $user
+        ]);
     }
 
 }
