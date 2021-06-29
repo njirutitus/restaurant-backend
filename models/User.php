@@ -35,7 +35,8 @@ class User extends UserModel
         return 'id';
     }
 
-    public function register(){
+    public function register()
+    {
         $this->password = password_hash($this->password,PASSWORD_DEFAULT);
         $this->status = self::STATUS_INACTIVE;
         return parent::save();

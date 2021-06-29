@@ -5,12 +5,23 @@ namespace app\models;
 
 
 use tn\phpmvc\db\Model;
+use tn\phpmvc\DbModel;
 
-class ContactForm extends Model
+class ContactForm extends DbModel
 {
     public string $subject = '';
     public string $email = '';
     public string $body = '';
+
+    public static function tableName(): string
+    {
+        return 'contact';
+    }
+
+    public static function primaryKey(): string
+    {
+        return 'id';
+    }
 
     public function rules(): array
     {
@@ -19,6 +30,11 @@ class ContactForm extends Model
             'email' => [self::RULE_REQUIRED,self::RULE_EMAIL],
             'body' => [self::RULE_REQUIRED],
         ];
+    }
+
+    public function  attributes(): array
+    {
+        return ['subject','email','body'];
     }
 
     public function labels(): array
@@ -31,7 +47,7 @@ class ContactForm extends Model
     }
 
     public function send(): bool{
-        return true;
+        return parent::save();
     }
 
 }
