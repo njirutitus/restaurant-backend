@@ -29,6 +29,10 @@ class AuthController extends Controller
         if($request->isPost()) {
             $loginForm->loadData($request->getBody());
             if ($loginForm->validate() && $loginForm->login()) {
+                if(Application::isStaff() == '1') {
+                    $response->redirect('/admin');
+                    return;
+                }
                 $response->redirect('/');
                 return;
             }

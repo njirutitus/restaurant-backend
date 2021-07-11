@@ -15,6 +15,12 @@ $config = [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD']
+    ],
+    'mail' => [
+        'host' => $_ENV['MAIL_HOST'],
+        'username' => $_ENV['MAIL_USERNAME'],
+        'password' => $_ENV['MAIL_PASSWORD'],
+        'port' => $_ENV['MAIL_PORT'],
     ]
 ];
 ;
@@ -39,6 +45,9 @@ $app->router->get('/menu',[MenuController::class,'menu']);
 $app->router->get('/menuitem',[MenuController::class,'menuitem']);
 $app->router->get('/menuitems',[MenuController::class,'menus']);
 $app->router->get('/admin_dishes_add',[MenuController::class,'add_menu']);
+$app->router->post('/admin_dishes_add',[MenuController::class,'add_menu']);
+$app->router->get('/admin_dishes',[MenuController::class,'dishes']);
+$app->router->post('/admin_dishes_delete',[MenuController::class,'delete_menu']);
 
 
 

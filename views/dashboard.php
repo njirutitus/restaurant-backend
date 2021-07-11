@@ -2,7 +2,7 @@
           <h1>Dishes</h1>
           <div class="underline"></div>
           <br />
-          <a href="/admin_dishes_add" class="ml-auto btn">
+          <a href="/admin_dishes_add" class="mr-auto btn bg-success">
             <i class="fas fa-plus"></i> Add Dish
           </a>
           <div class="table-responsive">

@@ -6,10 +6,10 @@ namespace app\models;
 
 class Menu extends \tn\phpmvc\DbModel
 {
-    public string $title = '';
+    public string $item_title = '';
     public string $price = '';
     public string $desc = '';
-    public string $category = '';
+    public string $item_category = '';
     public string $img = '';
 
     public static function tableName(): string
@@ -19,7 +19,7 @@ class Menu extends \tn\phpmvc\DbModel
 
     public function attributes(): array
     {
-        return ['title','price','desc','category','img'];
+        return ['item_title','item_category','price','img','desc'];
     }
 
     public static function primaryKey(): string
@@ -30,26 +30,32 @@ class Menu extends \tn\phpmvc\DbModel
     public function labels(): array
     {
         return [
-            'title' => 'Meal Name',
+            'item_title' => 'Meal Name',
+            'item_category' => 'Category',
             'price' => 'Price',
+            'img' => 'Meal Cover Image',
             'desc' => 'Description',
-            'category' => 'Category',
-            'img' => 'img'
         ];
     }
 
     public function rules(): array
     {
         return [
-        'title' => [self::RULE_REQUIRED],
+        'item_title' => [self::RULE_REQUIRED],
+        'item_category' => [self::RULE_REQUIRED],
         'price' => [self::RULE_REQUIRED,self::RULE_NUMBER],
-        'desc' => [self::RULE_REQUIRED],
-        'category' => [self::RULE_REQUIRED],
         'img' => [self::RULE_REQUIRED],
+        'desc' => [self::RULE_REQUIRED],
         ];
     }
 
-    public function add() {
+    public function add(): bool
+    {
         return parent::save();
+    }
+
+    public function fetchAll()
+    {
+        return parent::findAll();
     }
 }

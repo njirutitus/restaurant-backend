@@ -13,6 +13,8 @@ namespace app\controllers;
 
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
+use tn\phpmvc\middlewares\AdminMiddleware;
+use tn\phpmvc\middlewares\AuthMiddleware;
 use tn\phpmvc\Request;
 use tn\phpmvc\Response;
 use app\models\ContactForm;
@@ -33,6 +35,15 @@ use PHPMailer\PHPMailer\Exception;
  */
 class SiteController extends Controller
 {
+    /**
+     * SiteController constructor.
+     */
+    public function __construct()
+    {
+        $this->registerMiddleWare(new AdminMiddleware(['dashboard']));
+
+    }
+
     /**
      * Function home
      *

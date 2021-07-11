@@ -1,4 +1,4 @@
-const menu = [
+/* const menu = [
   {
     id: 1,
     title: "buttermilk pancakes",
@@ -73,18 +73,13 @@ const menu = [
   },
 ];
 
-
+*/
 
 
 const sectionCenter = document.querySelector(".menu-items");
 const btnContainer = document.querySelector(".btn-container");
 
 // fetch api
-fetch('/menuitems')
-    .then(response => response.json())
-    .then(menu => {
-      console.log(menu)
-    });
 window.addEventListener("DOMContentLoaded", async function () {
   await fetch('/menuitems')
       .then(response => response.json())
@@ -95,16 +90,21 @@ window.addEventListener("DOMContentLoaded", async function () {
       });
 });
 
+// window.addEventListener("DOMContentLoaded", function () {
+//   displayMenuItems(menu);
+//   displayMenuButtons(menu);
+// })
+
 function displayMenuItems(menuItems) {
   let displayMenu = menuItems.map(function (item) {
     return ` <div class="menu-item row">
     <div class="item-img">
-    <a href="/menuitem?id=${item.id}"><img src="${item.img}" alt="${item.title}" /></a>
+    <a href="/menuitem?id=${item.id}"><img src="${item.img}" alt="${item.item_title}" /></a>
     </div>
     
     <div class="item-description">
     <div class="item-header">
-    <h3>${item.title}</h3>
+    <h3>${item.item_title} &nbsp;</h3>
     <h3>KES ${item.price}</h3>
     </div>
     <p>
@@ -115,21 +115,23 @@ function displayMenuItems(menuItems) {
     `;
   });
   displayMenu = displayMenu.join("");
-  // console.log(displayMenu);
+  if (!sectionCenter) return;
+  sectionCenter.innerHTML = displayMenu
 
-  sectionCenter.innerHTML = displayMenu;
 }
 
 function displayMenuButtons(menu) {
   const categories = menu.reduce(
     function (values, item) {
-      if (!values.includes(item.category)) {
-        values.push(item.category);
+      if (!values.includes(item.item_category)) {
+        values.push(item.item_category);
       }
       return values;
     },
     ["all"]
   );
+
+  if (!btnContainer) return;
   btnContainer.innerHTML = categories
       .map(function (category) {
         return `<button type="button" class="filter-btn" data-id=${category}>
@@ -137,16 +139,17 @@ function displayMenuButtons(menu) {
         </button>`;
       })
       .join("");
+
   const filterBtns = btnContainer.querySelectorAll(".filter-btn");
-  console.log(filterBtns);
 
   filterBtns.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       // console.log(e.currentTarget.dataset);
       const category = e.currentTarget.dataset.id;
+      activeButton(category,filterBtns)
       const menuCategory = menu.filter(function (menuItem) {
         // console.log(menuItem.category);
-        if (menuItem.category === category) {
+        if (menuItem.item_category === category) {
           return menuItem;
         }
       });
@@ -157,4 +160,18 @@ function displayMenuButtons(menu) {
       }
     });
   });
+}
+
+function activeButton(id,filterButtons) {
+  filterButtons.forEach(function (btn) {
+    if(btn.dataset.id === id) {
+      btn.classList.add('selected')
+    }
+    else {
+      if(btn.classList.contains('selected')) {
+        btn.classList.remove('selected')
+      }
+    }
+  })
+
 }

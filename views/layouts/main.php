@@ -25,7 +25,7 @@
 <!-- Navigation bar-->
 <nav id="navbar" class="bg-dark">
     <a href="/" class="bg-dark">Mama Fish</a>
-    <ul class="list-unstyled">
+    <ul class="list-unstyled expand">
         <li>
             <a href="/" class="bg-dark"
             ><i class="fas fa-home"></i> Home /</a
@@ -44,6 +44,31 @@
         <li>
             <a href="/contact" class="bg-dark">
                 <i class="fas fa-id-card"></i> Contact us</a
+            >
+        </li>
+    </ul>
+
+<!--    Mobile Menu-->
+
+    <ul class="collapse list-unstyled">
+        <li>
+            <a href="/" class="bg-dark"
+            ><i class="fas fa-home"></i> /</a
+            >
+        </li>
+        <li>
+            <a href="/about" class="bg-dark"
+            ><i class="fas fa-info"></i> /</a
+            >
+        </li>
+        <li>
+            <a href="/menu" class="bg-dark dropdown"
+            ><i class="fas fa-bars"></i> /</a
+            >
+        </li>
+        <li>
+            <a href="/contact" class="bg-dark">
+                <i class="fas fa-id-card"></i> </a
             >
         </li>
     </ul>
