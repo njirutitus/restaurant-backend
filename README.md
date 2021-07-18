@@ -1,5 +1,3 @@
-# restaurant
+# Restaurant Website
 
-## Web Development 1 Demo project
-
-This is a project to demonstrate html,css and javascript basics
+Backend for a fictional restaurant website called Mama Fish Restaurant.
