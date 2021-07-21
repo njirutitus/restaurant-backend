@@ -4,6 +4,7 @@
 namespace app\models;
 
 
+use tn\phpmvc\Application;
 use tn\phpmvc\DbModel;
 use tn\phpmvc\Model;
 use tn\phpmvc\UserModel;
@@ -38,8 +39,15 @@ class User extends UserModel
     public function register()
     {
         $this->password = password_hash($this->password,PASSWORD_DEFAULT);
-        $this->status = self::STATUS_INACTIVE;
+        $this->status = self::STATUS_ACTIVE;
         return parent::save();
+    }
+
+    public function updateProfile()
+    {
+        $this->password = password_hash($this->password,PASSWORD_DEFAULT);
+        $this->status = self::STATUS_INACTIVE;
+        return parent::update(['id'=>Application::$app->user['id']]);
     }
 
     public function rules(): array
