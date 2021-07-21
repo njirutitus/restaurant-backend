@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\ContactForm;
 use app\models\Menu;
+use app\models\MenuEditForm;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
 use tn\phpmvc\middlewares\AdminMiddleware;
@@ -20,7 +21,7 @@ class MenuController extends Controller
      */
     public function __construct()
     {
-        $this->registerMiddleWare(new AdminMiddleware(['add_menu','delete_menu']));
+        $this->registerMiddleWare(new AdminMiddleware(['add_menu', 'delete_menu','dishes','edit_menu']));
 
     }
 
@@ -37,35 +38,27 @@ class MenuController extends Controller
         $this->setLayout('admin');
         $file = new Filesystem();
         $menu = new Menu();
-        if($request->isPost()){
+        if ($request->isPost()) {
             $data = $request->getBody();
-            if ($data['img']['tmp_name']) {
-                $file->setMaxSize(10000);
-                $file->allowedTypes(array('image/jpeg','image/png','image/gif'));
-                $file->setDestFolder('media');
-                $img_name = $file->upload($data['img'],array("types" => array('image/jpeg','image/png','image/gif'),"max_size"=>10000,'dest'=>"media"));
-            }
-            else {
-                $img_name = '';
-            }
-            $data['img'] = $img_name;
             $menu->loadData($data);
-            if($menu->validate() && $menu->add()) {
-                Application::$app->session->setFlash('success','Menu Item added successfully');
+
+            if ($menu->validate() && $menu->add()) {
+                Application::$app->session->setFlash('success', 'Menu Item added successfully');
                 $response->redirect('/admin_dishes_add');
                 exit();
             }
 
         }
-        return $this->render('dish',[
+        return $this->render('dish', [
             'model' => $menu
         ]);
     }
+
     public function menuitem()
     {
         return $this->render('menu_view');
     }
-    
+
     public function menus()
     {
         $menu = new Menu();
@@ -78,20 +71,57 @@ class MenuController extends Controller
         $this->setLayout('admin');
         $menu = new Menu();
         $dishes = $menu->fetchAll();
-        return $this->render('dishes',[
-            'dishes' => $dishes
+        return $this->render('dishes', [
+            'dishes' => $dishes,
+            'model' => $menu
         ]);
 
     }
 
     public function delete_menu(Request $request)
     {
-        if($request->isPost()) {
+        if ($request->isGet()) {
             $data = $request->getBody();
             $id = $data['id'];
-            $user = Menu::deleteOne(['id' => $id]);
-            return json_encode($user);
+            $result = Menu::deleteOne(['id' => $id]);
+//            Application::$app->session->setFlash('success', 'Menu Item deleted successfully');
+            return json_encode($result);
         }
+        return json_encode(false);
+    }
+
+    public function edit_menu(Request $request,Response $response)
+    {
+        $this->setLayout('admin');
+        $menu = new MenuEditForm;
+
+        if ($request->isGet()) {
+            $data = $request->getBody();
+            $id = $data['id'];
+            $menu = MenuEditForm::findOne(['id' => $id]);
+            Application::$app->session->set('dish_edit_img',$menu->img) ;
+        }
+
+        if ($request->isPost()) {
+            $data = $request->getBody();
+            $menu->loadData($data);
+
+            if ($menu->validate() && $menu->edit()) {
+                if($data['img']['tmp_name'] && Application::$app->session->get('dish_edit_img') &&
+                    (Application::$app->session->get('dish_edit_img')) !== $menu->img) {
+                    unlink(Application::$app->session->get('dish_edit_img'));
+                    Application::$app->session->remove('dish_edit_img');
+                }
+                Application::$app->session->setFlash('success', 'Menu Item updated successfully');
+                $response->redirect('/admin_dishes');
+                exit();
+            }
+
+        }
+        return $this->render('dish_edit', [
+            'model' => $menu,
+            'img' => Application::$app->session->get('dish_edit_img'),
+        ]);
     }
 
 }
