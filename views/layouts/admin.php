@@ -35,7 +35,7 @@
                 <a href="/admin_dishes"><i class="fas fa-pizza-slice"></i> Dishes</a>
             </li>
             <li>
-                <a href=""><i class="fas fa-user-friends"></i> Users</a>
+                <a href="/admin_users"><i class="fas fa-user-friends"></i> Users</a>
             </li>
             <li>
                 <a href=""><i class="far fa-comments"></i> Comments</a>
@@ -104,5 +104,6 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="../js/main.js"></script>
+<script src="https://unpkg.com/htmx.org@1.5.0"></script>
 </body>
 </html>

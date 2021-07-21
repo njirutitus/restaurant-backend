@@ -97,19 +97,74 @@
         </p>
     </div>
     <div class="col-6">
-        <a href="/" class="ml-auto btn bg-primary">Make a Reservation</a>
+        <button class="ml-auto btn bg-primary action-btn" data-target="reservationModal">Make a Reservation</button>
     </div>
+
 </header>
-<div class="container">
+
+<div class="modal-wrapper" id="reservationModal">
+
+    <div class="modal">
+        <!-- Header -->
+        <div class="modal__header">
+            <h2>Reservation</h2>
+            <span class="close-icon closeModal">
+                <i class="fas fa-times fa-2x"></i>
+            </span>
+        </div>
+
+        <!-- Content -->
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group row mb-3">
+                <label class="col-3">Full Name</label>
+                <input type="text" name="item_title" value="" class="form-control col-6" id="item_title">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-3">Date</label>
+                <input type="date" name="price" value="" class="form-control col-6" id="price">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-3">Time</label>
+                <input type="time" name="price" value="" class="form-control col-6" id="price">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label class="col-3">Number of Adults</label>
+                <input type="number" name="item_category" value="" class="form-control col-6" id="item_category">
+                <div class="invalid-feedback"></div>
+            </div>
+        <!-- Footer -->
+        <div class="modal__footer">
+            <div class="btn btn-warning closeModal">Cancel</div>
+            <input type="submit" class="btn btn-primary" id="reserveTable" value="Reserve">
+        </div>
+        </form>
+
+
+    </div>
+</div>
+
+<div class="feedback">
     <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
         <div class="alert alert-success">
             <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
+            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
+        </div>
+    <?php endif; ?>
+    <?php if (\tn\phpmvc\Application::$app->session->getFlash('error')): ?>
+        <div class="alert alert-error">
+            <?php echo \tn\phpmvc\Application::$app->session->getFlash('error'); ?>
+            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
         </div>
     <?php endif; ?>
 </div>
 
         {{content}}
-
         <footer class="container-fluid">
             <div class="row">
                 <div class="col-3">
@@ -140,7 +195,12 @@
                 </div>
             </div>
         </footer>
+
+
+
+
 <script src="./js/menu.js"></script>
+<script src="./js/main.js"></script>
 
     </body>
 </html>
