@@ -4,13 +4,20 @@
 namespace app\models;
 
 
+use tn\phpmvc\utils\Filesystem;
+
 class Menu extends \tn\phpmvc\DbModel
 {
     public string $item_title = '';
     public string $price = '';
     public string $desc = '';
     public string $item_category = '';
-    public string $img = '';
+    public mixed $img = null;
+
+    public function __construct()
+    {
+        Filesystem::$destination_folder = 'public/media';
+    }
 
     public static function tableName(): string
     {
@@ -44,7 +51,9 @@ class Menu extends \tn\phpmvc\DbModel
         'item_title' => [self::RULE_REQUIRED],
         'item_category' => [self::RULE_REQUIRED],
         'price' => [self::RULE_REQUIRED,self::RULE_NUMBER],
-        'img' => [self::RULE_REQUIRED],
+        'img' => [self::RULE_REQUIRED,[self::RULE_MAX_FILE_SIZE,'max_size' => 10000000],
+            [self::RULE_VALID_FILE_TYPE,"types" => array('image/jpeg', 'image/png', 'image/gif','image/svg+xml')],
+        [self::RULE_UPLOADED]],
         'desc' => [self::RULE_REQUIRED],
         ];
     }
