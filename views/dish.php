@@ -42,7 +42,6 @@ $this->title = "New Dish";
                 <input
                     type="submit"
                     class="form-control btn bg-success"
-                    name="submit"
                     value="Add"
                     id="submit"
                 />
