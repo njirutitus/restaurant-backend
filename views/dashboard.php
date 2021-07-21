@@ -1,79 +1,53 @@
-
-          <h1>Dishes</h1>
-          <div class="underline"></div>
-          <br />
-          <a href="/admin_dishes_add" class="mr-auto btn bg-success">
-            <i class="fas fa-plus"></i> Add Dish
-          </a>
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Dish Name</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Chips</td>
-                  <td>300</td>
-                  <td>Lunch</td>
-                  <td>
-                    Potato chips, or crisps, are thin slices of potato that have
-                    been either deep fried or baked until crunchy. Served with
-                    burger
-                  </td>
-                  <td>
-                    <a class="btn bg-warning" href="">Delete</a>
-                    <a class="btn bg-success" href="">Edit</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Bugger</td>
-                  <td>480</td>
-                  <td>Breakfast</td>
-                  <td>
-                    My ultimate burger requires two hands to eat, but the best
-                    bit is licking your fingers at the end
-                  </td>
-                  <td>
-                    <a class="btn bg-warning" href="">Delete</a>
-                    <a class="btn bg-success" href="">Edit</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Pan Cakes</td>
-                  <td>280</td>
-                  <td>Breakfast</td>
-                  <td>
-                    prepared from a starch-based batter that may contain eggs,
-                    milk and butter and cooked on a hot surface
-                  </td>
-                  <td>
-                    <a class="btn bg-warning" href="">Delete</a>
-                    <a class="btn bg-success" href="">Edit</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Ice Cream</td>
-                  <td>180</td>
-                  <td>Snack</td>
-                  <td>
-                    made from dairy milk or cream and is flavoured with a
-                    sweetener, either sugar or an alternative, and any spice,
-                    such as cocoa or vanilla. Colourings are usually added, in
-                    addition to stabilizers.
-                  </td>
-                  <td>
-                    <a class="btn bg-warning" href="">Delete</a>
-                    <a class="btn bg-success" href="">Edit</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-
+<main class="container">
+    <div class="highlights">
+        <button class="btn">Users: 400</button>
+        <button class="btn">Dishes: 500</button>
+        <button class="btn">Orders: 200</button>
+        <button class="btn">Comments: 6000</button>
+    </div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js" integrity="sha512-5vwN8yor2fFT9pgPS9p9R7AszYaNn0LkQElTXIsZFCL7ucT8zDCAqlQXDdaqgA1mZP47hdvztBMsIoFxq/FyyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'June','July','Aug','Sept','Oct','Nov','Dec'],
+            datasets: [{
+                label: '# of Orders',
+                data: [200, 190, 300, 500, 200, 300,200, 190, 300, 500, 200, 300],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
