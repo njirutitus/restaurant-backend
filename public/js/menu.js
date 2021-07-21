@@ -84,7 +84,6 @@ window.addEventListener("DOMContentLoaded", async function () {
   await fetch('/menuitems')
       .then(response => response.json())
       .then(menu => {
-        console.log(menu)
         displayMenuItems(menu);
         displayMenuButtons(menu);
       });
@@ -97,19 +96,32 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 function displayMenuItems(menuItems) {
   let displayMenu = menuItems.map(function (item) {
-    return ` <div class="menu-item row">
+    let img = ''
+    if((item.img.startsWith('public')))
+      img = (item.img).slice(7)
+    else img = item.img
+    return ` <div class="menu-item">
     <div class="item-img">
-    <a href="/menuitem?id=${item.id}"><img src="${item.img}" alt="${item.item_title}" /></a>
+    <a href="/menuitem?id=${item.id}"><img src="${img}" alt="${item.item_title}" /></a>
     </div>
     
     <div class="item-description">
     <div class="item-header">
-    <h3>${item.item_title} &nbsp;</h3>
+    <h3>${item.item_title}<span class="badge bg-warning rounded">HOT</span></h3>
     <h3>KES ${item.price}</h3>
     </div>
     <p>
     ${item.desc}
     </p>
+    <div class="item-footer">
+    <div class="star-checkbox">
+            <input type="checkbox" id="star-1">
+            <label for="star-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            </label>
+          </div>
+</div>
     </div>
     </div>
     `;

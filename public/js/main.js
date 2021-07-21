@@ -1,52 +1,94 @@
 const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("main-content");
+const file_input = document.querySelectorAll('input[type="file"]');
+
 
 const toggle = document.getElementById("sidebarToggleTop");
-const modalClose = document.getElementById("closeModal");
-const modalWrapper = document.getElementById('modalWrapper');
-const deleteButtons = document.querySelectorAll('.delete-btn')
-const dishId = document.getElementById('dishId')
-const dishTitle = document.getElementById('dishTitle')
-const deleteDish = document.getElementById('deleteDish')
+const modalClose = document.querySelectorAll(".closeModal");
+const modalWrapper = document.querySelectorAll('.modal-wrapper');
+const id = document.querySelector('.id');
+const title = document.querySelector('.title');
+const actionButtons = document.querySelectorAll('.action-btn')
+const deleteDish = document.getElementById('deleteDish') ?? false
+const fetchDish = document.getElementById('fetchDish') ?? false
 
-deleteDish.addEventListener('click',async function (){
-  const url = "/admin_dishes_delete"
-  const id = dishId.textContent
-  const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(id) // body data type must match "Content-Type" header
-  });
-  console.log(response.json())
-  return response.json();
+const closeFeedback = document.querySelectorAll('.close-icon');
+const feedback = document.querySelectorAll('.feedback');
+
+window.addEventListener('DOMContentLoaded',function () {
+  if (file_input) {
+    file_input.forEach(file => {
+      file.classList.add('file-input')
+    })
+  }
 })
 
-deleteButtons.forEach(function (btn) {
+closeFeedback.forEach(btn => {
+  btn.addEventListener('click', function () {
+    feedback.forEach(fb=>{
+      fb.textContent = '';
+    })
+  })
+})
+
+if(fetchDish)
+  fetchDish.addEventListener('click',async function() {
+    const Id = id.textContent
+    const url = `/admin_fetch_dish?id=${Id}`
+    const response = await fetch(url)
+    response.json().then(result => {
+      console.log(result)
+      if (result) {
+        document.item_title.value = result['title'];
+      }
+    })
+
+  } )
+
+if(deleteDish) {
+  deleteDish.addEventListener('click', async function () {
+    const Id = id.textContent
+    const url = `/admin_dishes_delete?id=${Id}`
+    const response = await fetch(url)
+    response.json().then(result => {
+      if (result) {
+        console.log('Success');
+        window.location.replace("/admin_dishes");
+      }
+      else console.error('Unsuccessful')
+    })
+  })
+}
+
+actionButtons.forEach(function (btn) {
   btn.addEventListener("click", function (e) {
-    const id = e.currentTarget.dataset.id;
-    const title=  e.currentTarget.dataset.title;
-    modalWrapper.style.display = "flex"
-    dishId.textContent = id;
-    dishTitle.textContent = title
+    const Id = e.currentTarget.dataset.id;
+    const Title=  e.currentTarget.dataset.title;
+    const modal = document.getElementById(e.currentTarget.dataset.target);
+    modal.style.display = "flex"
+    if(id)
+    id.textContent = Id;
+    if(title)
+    title.textContent = Title
   });
 });
 
-modalClose.addEventListener('click',function (e){
-  modalWrapper.style.display = "none"
+modalClose.forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    modalWrapper.forEach(function (md) {
+      if (md.style.display === "flex") {
+        md.style.display = "none"
+      }
+    })
+  })
 })
 
 window.addEventListener('DOMContentLoaded',function (){
-  setIcon()
+  if (sidebar)
+    setIcon()
 })
 
+if(toggle)
 toggle.addEventListener('click',function (){
   setIcon()
   sidebarToggle()
@@ -78,7 +120,3 @@ function setIcon() {
     toggle.appendChild(menu_icon);
   }
 }
-// document.getElementById('close').addEventListener('click',(e) =>closeAlert(e.target))
-// function closeAlert(icon) {
-//   icon.parentNode.parentNode.textContent = '';
-// }
