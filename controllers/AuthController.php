@@ -4,8 +4,10 @@
 namespace app\controllers;
 
 
+use app\models\ProfileForm;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
+use tn\phpmvc\middlewares\AdminMiddleware;
 use tn\phpmvc\middlewares\AuthMiddleware;
 use tn\phpmvc\Request;
 use tn\phpmvc\Response;
@@ -20,6 +22,8 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->registerMiddleWare(new AuthMiddleware(['profile']));
+        $this->registerMiddleWare(new AdminMiddleware(['users']));
+
     }
 
     public function login(Request $request, Response $response)
@@ -72,11 +76,35 @@ class AuthController extends Controller
         $response->redirect('/');
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
-        $user = new User();
+        $user = new ProfileForm();
+        if ($request->isPost()) {
+            $user->loadData($request->getBody());
+
+            if($user->validate() && $user->updateProfile()) {
+                Application::$app->session->setFlash('success','Your profile has been updated');
+                Application::$app->response->redirect('/profile');
+                exit();
+            }
+
+            return $this->render('profile',[
+                'model'=> $user
+            ]);
+        }
         return $this->render('profile',[
-            'model'=> $user
+            'model'=> Application::$app->user
+        ]);
+    }
+
+    public function users()
+    {
+        $this->setLayout('admin');
+        $user = new User();
+        $users = $user::findAll();
+        return $this->render('users', [
+            'users' => $users,
+            'model' => $user
         ]);
     }
 
