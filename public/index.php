@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\AuthController;
+use app\controllers\FileController;
 use app\controllers\MenuController;
 use tn\phpmvc\Application;
 use app\controllers\SiteController;
@@ -39,6 +40,7 @@ $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
 
 $app->router->get('/profile',[AuthController::class,'profile']);
+$app->router->post('/profile',[AuthController::class,'profile']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 
 $app->router->get('/menu',[MenuController::class,'menu']);
@@ -47,9 +49,11 @@ $app->router->get('/menuitems',[MenuController::class,'menus']);
 $app->router->get('/admin_dishes_add',[MenuController::class,'add_menu']);
 $app->router->post('/admin_dishes_add',[MenuController::class,'add_menu']);
 $app->router->get('/admin_dishes',[MenuController::class,'dishes']);
-$app->router->post('/admin_dishes_delete',[MenuController::class,'delete_menu']);
-
-
+$app->router->get('/admin_dishes_delete',[MenuController::class,'delete_menu']);
+$app->router->get('/admin_dish_edit',[MenuController::class,'edit_menu']);
+$app->router->post('/admin_dish_edit',[MenuController::class,'edit_menu']);
+$app->router->get('/admin_users',[AuthController::class,'users']);
+$app->router->get('/file',[FileController::class,'getFile']);
 
 $app->run();
 
