@@ -55,8 +55,8 @@ class MenuEditForm extends \tn\phpmvc\DbModel
         'item_category' => [self::RULE_REQUIRED],
         'price' => [self::RULE_REQUIRED,self::RULE_NUMBER],
         'img' => [[self::RULE_MAX_FILE_SIZE,'max_size' => 10000000],
-            [self::RULE_INVALID_FILE_TYPE,"types" => array('image/jpeg', 'image/png', 'image/gif')],
-        [self::RULE_FAILED_UPLOAD]],
+            [self::RULE_VALID_FILE_TYPE,"types" => array('image/jpeg', 'image/png', 'image/gif')],
+        [self::RULE_UPLOADED]],
         'desc' => [self::RULE_REQUIRED],
         ];
     }
