@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6ed1d3079fbc35c34e9ad418cce2e05",
+    "content-hash": "7bf8964fb9e079d2c4daa6ccef8154eb",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -461,16 +461,16 @@
         },
         {
             "name": "tn/php-mvc-core",
-            "version": "v1.0.9",
+            "version": "v1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/njirutitus/tn-php-mvc-framework.git",
-                "reference": "0c7faaa7fc92e2cd799b6b6fc0f1b0eeb8620125"
+                "reference": "490175969c3422123fb637870125d6c173ece0c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/njirutitus/tn-php-mvc-framework/zipball/0c7faaa7fc92e2cd799b6b6fc0f1b0eeb8620125",
-                "reference": "0c7faaa7fc92e2cd799b6b6fc0f1b0eeb8620125",
+                "url": "https://api.github.com/repos/njirutitus/tn-php-mvc-framework/zipball/490175969c3422123fb637870125d6c173ece0c3",
+                "reference": "490175969c3422123fb637870125d6c173ece0c3",
                 "shasum": ""
             },
             "type": "library",
@@ -488,9 +488,9 @@
             ],
             "support": {
                 "issues": "https://github.com/njirutitus/tn-php-mvc-framework/issues",
-                "source": "https://github.com/njirutitus/tn-php-mvc-framework/tree/v1.0.9"
+                "source": "https://github.com/njirutitus/tn-php-mvc-framework/tree/v1.0.13"
             },
-            "time": "2021-04-11T12:01:47+00:00"
+            "time": "2021-07-21T21:42:50+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
