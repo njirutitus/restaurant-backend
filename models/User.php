@@ -81,4 +81,9 @@ class User extends UserModel
     {
         return $this->firstname.' '.$this->lastname;
     }
+
+    function getInitials(): string
+    {
+        return strtoupper(substr($this->firstname,0,1).substr($this->lastname,0,1));
+    }
 }
