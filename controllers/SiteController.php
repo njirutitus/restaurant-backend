@@ -81,8 +81,8 @@ class SiteController extends Controller
         $contact = new ContactForm();
         if($request->isPost()){
             $contact->loadData($request->getBody());
-            if($contact->validate() && $contact->send()) {
-                if($this->send_mail()) {
+            if($contact->validate() && $contact->add()) {
+                if($contact->send()) {
                     Application::$app->session->setFlash('success','Thanks for contacting us');
                 }
                 else {
@@ -133,7 +133,7 @@ class SiteController extends Controller
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->Username   = 'royalkinginvest@gmail.com';                     //SMTP username
-            $mail->Password   = 'qA`?na}y2rh@oNV;';                               //SMTP password
+            $mail->Password   = 'Xg!=c5uP$UGkZXHG';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -141,8 +141,8 @@ class SiteController extends Controller
             $mail->setFrom('royalkinginvest@gmail.com', 'Royal King Investment');
             $mail->addAddress('titokym96@gmail.com', 'Tito Kim');     //Add a recipient
             $mail->addReplyTo('royalkinginvest@gmail.com', 'Royal King Investment');
-            $mail->addCC('');
-            $mail->addBCC('');
+//            $mail->addCC('');
+//            $mail->addBCC('');
 
             //Attachments
 //            $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
@@ -157,7 +157,8 @@ class SiteController extends Controller
             $mail->send();
             return true;
         } catch (Exception $e) {
-//            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            exit();
             return false;
         }
     }

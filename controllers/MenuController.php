@@ -9,6 +9,7 @@ use app\models\Menu;
 use app\models\MenuEditForm;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
+use tn\phpmvc\exception\NotFoundException;
 use tn\phpmvc\middlewares\AdminMiddleware;
 use tn\phpmvc\Request;
 use tn\phpmvc\Response;
@@ -54,8 +55,24 @@ class MenuController extends Controller
         ]);
     }
 
-    public function menuitem()
+    /**
+     * @throws NotFoundException
+     */
+    public function menuitem(Request $request)
     {
+        if ($request->isGet()) {
+            $data = $request->getBody();
+            $id = $data['id'];
+            $result = Menu::findOne(['id' => $id]);
+            if ($result)
+            return $this->render('menu_view',[
+                'menuitem' => $result
+                ]
+            );
+            else
+                throw new NotFoundException();
+
+        }
         return $this->render('menu_view');
     }
 

@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\PasswordResetForm;
 use app\models\ProfileForm;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
@@ -94,6 +95,23 @@ class AuthController extends Controller
         }
         return $this->render('profile',[
             'model'=> Application::$app->user
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->setLayout('auth');
+        $user = new PasswordResetForm();
+        $token = $user->getToken();
+        if ($request->isPost()) {
+            $user->loadData($request->getBody());
+            if(!$user->validate())
+            return $this->render('password-reset',[
+                'model'=> $user
+            ]);
+        }
+        return $this->render('password-reset',[
+            'model'=> $user
         ]);
     }
 
