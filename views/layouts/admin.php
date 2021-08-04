@@ -34,9 +34,12 @@
             <li>
                 <a href="/admin_dishes"><i class="fas fa-pizza-slice"></i> Dishes</a>
             </li>
+
+            <?php if (\tn\phpmvc\Application::isSuperAdmin()):?>
             <li>
                 <a href="/admin_users"><i class="fas fa-user-friends"></i> Users</a>
             </li>
+            <?php endif;?>
             <li>
                 <a href=""><i class="far fa-comments"></i> Comments</a>
             </li>
