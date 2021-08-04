@@ -24,7 +24,7 @@ $config = [
         'port' => $_ENV['MAIL_PORT'],
     ]
 ];
-;
+
 
 $app = new Application(dirname(__DIR__), $config);
 $app->router->get('/',[SiteController::class,'home']);
