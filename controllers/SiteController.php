@@ -11,6 +11,8 @@
 namespace app\controllers;
 
 
+use app\models\Menu;
+use app\models\User;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
 use tn\phpmvc\middlewares\AdminMiddleware;
@@ -114,8 +116,18 @@ class SiteController extends Controller
      */
     public function dashboard()
     {
+        $menu = new Menu();
+        $user= new User();
+
+        $menus = count($menu->fetchAll());
+        $users = count($user::findAll());
+
+
         $this->setLayout('admin');
-        return $this->render('dashboard');
+        return $this->render('dashboard',[
+            'users' => $users,
+            'menus' => $menus
+        ]);
     }
 
 }
