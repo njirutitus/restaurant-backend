@@ -1,7 +1,14 @@
+<?php
+/**
+ * @var $users
+ * @var $menus
+*/
+?>
+
 <main class="container">
     <div class="highlights">
-        <button class="btn">Users: 400</button>
-        <button class="btn">Dishes: 500</button>
+        <a href="/admin_users" class="btn">Users: <?php echo $users;?></a>
+        <a href="/admin_dishes" class="btn">Dishes: <?php echo $menus;?></a>
         <button class="btn">Orders: 200</button>
         <button class="btn">Comments: 6000</button>
     </div>
