@@ -15,12 +15,21 @@ const fetchDish = document.getElementById('fetchDish') ?? false
 const closeFeedback = document.querySelectorAll('.close-icon');
 const feedback = document.querySelectorAll('.feedback');
 
+const linkButtons = document.querySelectorAll(".btn-link")
+
 window.addEventListener('DOMContentLoaded',function () {
   if (file_input) {
     file_input.forEach(file => {
       file.classList.add('file-input')
     })
   }
+})
+
+linkButtons.forEach(linkButton =>  {
+  linkButton.addEventListener('click', (e)=>{
+    const url = e.currentTarget.dataset.target
+    window.location.replace(url)
+  })
 })
 
 closeFeedback.forEach(btn => {

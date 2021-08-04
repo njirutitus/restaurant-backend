@@ -102,7 +102,7 @@ function displayMenuItems(menuItems) {
     else img = item.img
     return ` <div class="menu-item">
     <div class="item-img">
-    <a href="/menuitem?id=${item.id}"><img src="${img}" alt="${item.item_title}" /></a>
+    <a href="/menuitem?id=${item.id}"><img class="img-thumbnail" src="${img}" alt="${item.item_title}" /></a>
     </div>
     
     <div class="item-description">
