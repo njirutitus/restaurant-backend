@@ -1,17 +1,14 @@
 <?php
+/**
+ * @var $menuitem Menu
+ */
+
+use app\models\Menu;
+
 ?>
 <?php
 $this->title = "Menu";
 ?>
-
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="/menu">Menu</a>
-    <div class="separator">/</div>
-    <a href="">Menu Item</a>
-</div>
 
 <!-- Menu Items -->
 <main class="container">
@@ -20,5 +17,17 @@ $this->title = "Menu";
     <div class="underline"></div>
     <br />
 
+    <div class="row">
+        <div class="col-6">
+            <?php
+            $img = str_starts_with($menuitem->img,'public')?substr($menuitem->img,7):$menuitem->img;
 
+            echo '<img class="img-fluid" src="'.$img.'" alt="bugger" width="300" height="600">
+                    </div>
+                    <div class="col-6">
+                        <h2>'.$menuitem->item_title.'</h2>
+                        <p>'.$menuitem->desc.'</p>
+                    </div>';
+            ?>
+    </div>
 </main>

@@ -1,6 +1,23 @@
 <?php
 $this->title = "Home";
 ?>
+<!-- Jumbotron -->
+<header class="jumbotron row">
+    <div class="col-6">
+        <h1>Mama Fish Restaurant</h1>
+        <p>
+            We take inspiration from the World's best cuisines, and create a
+            unique fusion experience. Our lipsmacking creations will tickle your
+            culinary senses!
+        </p>
+        <button class="ml-auto nav--button bg-primary action-btn" data-target="reservationModal">Book a Table</button>
+        <button class="ml-auto nav--button btn-link bg-error" data-target="/menu">View Menu</button>
+    </div>
+    <div class="col-6">
+        <img class="img-fluid" src="./images/eating-together.png" alt="" />
+    </div>
+</header>
+
 <main class="container">
     <div class="row row-content highlights-item">
         <div class="title">
@@ -12,8 +29,7 @@ $this->title = "Home";
                 <img
                         src="./images/pizza.png"
                         alt="pizza"
-                        width="200"
-                        height="300"
+                        class="img-thumbnail"
                 />
             </div>
             <div class="highlight-description">
@@ -37,8 +53,7 @@ $this->title = "Home";
                 <img
                         src="./images/buffet.png"
                         alt="Buffet"
-                        width="200"
-                        height="300"
+                        class="img-thumbnail"
                 />
             </div>
             <div class="highlight-description">
@@ -63,8 +78,7 @@ $this->title = "Home";
                 <img
                         src="./images/titus.jpg"
                         alt="Chef Titus"
-                        width="200"
-                        height="300"
+                        class="img-thumbnail"
                 />
             </div>
             <div class="highlight-description">

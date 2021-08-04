@@ -1,26 +1,22 @@
 <?php
-/** @var $model User */
+/** @var $model PasswordResetForm */
 
-use app\models\User;
+use app\models\PasswordResetForm;
 
-$this->title = "Login";
+$this->title = "Reset password";
 
 ?>
 <main class="container">
     <div class="flex-col-center">
         <a href="/"><img src="./images/mama-fish.png" alt="Logo" height="45"></a>
     </div>
-    <h1>Log in to continue</h1>
-
-    <div class="underline"></div>
-    <br>
 
     <!-- Feedback Form-->
     <section class="container box">
+        <h2> Forgot Your Password? </h2>
+        <p>We get it, stuff happens. Just enter your email below and we'll send you instructions to reset your password!</p>
             <?php $form = tn\phpmvc\form\Form::begin("","post") ?>
                 <?php echo $form->field($model,'email') ?>
-                <div class="flex-col-end"><a href="/password-reset" class="nav-link"> Forgot Password?</a></div>
-                <?php echo $form->field($model,'password')->passwordField() ?>
                 <div class="form-control row">
                     <div class="col-3"></div>
                     <div class="col-6">
@@ -28,12 +24,13 @@ $this->title = "Login";
                                 type="submit"
                                 class="btn bg-primary"
                                 name="submit"
-                                value="Submit"
+                                value="Reset Password"
                                 id="submit"
                         />
                     </div>
                 </div>
         <?php echo tn\phpmvc\form\Form::end(); ?>
         <p class="b">New here? <a href="/register" class="nav-link"> Create an account</a></p>
+        <p class="b">Already have an account? <a href="/login" class="nav-link"> Login</a></p>
     </section>
 </main>

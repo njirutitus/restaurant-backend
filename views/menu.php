@@ -1,13 +1,16 @@
 <?php
 $this->title = "Menu";
 ?>
+<!-- Jumbotron -->
+<header class="jumbotron row">
+    <div class="col-6">
+        <h1>It's not just food, it's an experience</h1>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="">Menu</a>
-</div>
+    </div>
+    <div class="col-6">
+        <img class="img-fluid" src="./images/nutritious-removebg-preview.png" alt="" />
+    </div>
+</header>
 
 <!-- Menu Items -->
 <main class="container">

@@ -1,12 +1,6 @@
 <?php
 $this->title = "Home";
 ?>
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="">About</a>
-</div>
 
 <!-- About us main Section-->
 <main class="container">
@@ -66,7 +60,7 @@ $this->title = "Home";
         <div class="row">
             <div class="col-4">
                 <h3>Peter Pan</h3>
-                <img src="./images/titus.jpg" alt="Chef Titus" />
+                <img class="img-thumbnail" src="./images/titus.jpg" alt="Chef Titus" />
             </div>
             <div class="col-8">
                 <p>
@@ -91,7 +85,7 @@ $this->title = "Home";
         <div class="row">
             <div class="col-4">
                 <h3>Danny</h3>
-                <img src="./images/titus.jpg" alt="Chef Titus" />
+                <img class="img-thumbnail" src="./images/titus.jpg" alt="Chef Titus" />
             </div>
             <div class="col-8">
                 <p>
@@ -115,7 +109,7 @@ $this->title = "Home";
         <div class="row">
             <div class="col-4">
                 <h3>Agumbe</h3>
-                <img src="./images/titus.jpg" alt="Chef Titus" />
+                <img class="img-thumbnail" src="./images/titus.jpg" alt="Chef Titus" />
             </div>
             <div class="col-8">
                 <p>
@@ -137,7 +131,7 @@ $this->title = "Home";
         <div class="row">
             <div class="col-3">
                 <h3>Titus</h3>
-                <img src="./images/titus.jpg" alt="Chef Titus" />
+                <img class="img-thumbnail" src="./images/titus.jpg" alt="Chef Titus" />
             </div>
             <div class="col-9">
                 <p>Executive Chef</p>

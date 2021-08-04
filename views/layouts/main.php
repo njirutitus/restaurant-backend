@@ -24,27 +24,17 @@
 <body>
 <!-- Navigation bar-->
 <nav id="navbar" class="bg-dark">
-    <a href="/" class="bg-dark">Mama Fish</a>
+    <a href="/" class="nav-link"><img src="./images/mama-fish.png" alt="Logo" height="45"></a>
     <ul class="list-unstyled expand">
         <li>
-            <a href="/" class="bg-dark"
-            ><i class="fas fa-home"></i> Home /</a
-            >
+            <a href="/" class="nav-link active">Home</a>
         </li>
         <li>
-            <a href="/about" class="bg-dark"
-            ><i class="fas fa-info"></i> About us /</a
-            >
+            <a href="/about" class="nav-link">About us</a>
         </li>
+        <li><a href="/menu" class="nav-link">Menu</a></li>
         <li>
-            <a href="/menu" class="bg-dark dropdown"
-            ><i class="fas fa-bars"></i> Menu /</a
-            >
-        </li>
-        <li>
-            <a href="/contact" class="bg-dark">
-                <i class="fas fa-id-card"></i> Contact us</a
-            >
+            <a href="/contact" class="nav-link">Contact</a>
         </li>
     </ul>
 
@@ -52,55 +42,63 @@
 
     <ul class="collapse list-unstyled">
         <li>
-            <a href="/" class="bg-dark"
-            ><i class="fas fa-home"></i> /</a
-            >
+            <a href="/" class="nav-link"><i class="fas fa-home"></i></a>
         </li>
         <li>
-            <a href="/about" class="bg-dark"
-            ><i class="fas fa-info"></i> /</a
-            >
+            <a href="/about" class="nav-link"><i class="fas fa-info"></i></a>
         </li>
         <li>
-            <a href="/menu" class="bg-dark dropdown"
-            ><i class="fas fa-bars"></i> /</a
-            >
+            <a href="/menu" class="nav-link"><i class="fas fa-bars"></i></a>
         </li>
         <li>
-            <a href="/contact" class="bg-dark">
-                <i class="fas fa-id-card"></i> </a
-            >
+            <a href="/contact" class="nav-link"><i class="fas fa-id-card"></i> </a>
         </li>
     </ul>
     <?php  if (\tn\phpmvc\Application::isGuest()): ?>
     <div>
-        <a href="/login" class="bg-dark"> <i class="fas fa-sign-in-alt"></i> Login</a>&nbsp;&nbsp;&nbsp;
-        <a href="/register" class="bg-dark b"> <i class="fas fa-user-plus"></i> Sign Up</a>
+<!--        <a href="" class="nav-link"> <i class="fas fa-cart-plus"></i></a>-->
+        <a href="/login" class="nav--button"> <i class="fas fa-sign-in-alt"></i> Login</a>&nbsp;&nbsp;&nbsp;
+<!--        <a href="/register" class="nav-link"> <i class="fas fa-user-plus"></i> Sign Up</a>-->
     </div>
     <?php else: ?>
     <div>
-        <a href="/profile" class="bg-dark"> Profile</a>&nbsp;&nbsp;&nbsp;
-        <a href="/logout" class="bg-dark b">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
+        <a href="" class="nav-link"> <i class="fas fa-cart-plus"></i></a>
+        <a href="/profile" class="nav-link"> Profile</a>&nbsp;&nbsp;&nbsp;
+        <a href="/logout" class="nav-link">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
     </div>
     <?php endif; ?>
 
 </nav>
 
-<!-- Jumbotron -->
-<header class="jumbotron row">
-    <div class="col-6">
-        <h1 class="bg-dark">Mama Fish Restaurant</h1>
-        <p>
-            We take inspiration from the World's best cuisines, and create a
-            unique fusion experience. Our lipsmacking creations will tickle your
-            culinary senses!
-        </p>
-    </div>
-    <div class="col-6">
-        <button class="ml-auto btn bg-primary action-btn" data-target="reservationModal">Make a Reservation</button>
-    </div>
+<div class="feedback">
+    <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
+        <div class="alert alert-success">
+            <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
+            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
+        </div>
+    <?php endif; ?>
+    <?php if (\tn\phpmvc\Application::$app->session->getFlash('error')): ?>
+        <div class="alert alert-error">
+            <?php echo \tn\phpmvc\Application::$app->session->getFlash('error'); ?>
+            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
+        </div>
+    <?php endif; ?>
+</div>
 
-</header>
+        {{content}}
+        <footer class="container-fluid">
+                <div class="social">
+                    <a href="" class="nav-link"><i class="fab fa-twitter"></i></a>
+                    <a href="" class="nav-link"><i class="fab fa-instagram"></i></a>
+                    <a href="" class="nav-link"><i class="fab fa-facebook"></i></a>
+                    <a href="" class="nav-link"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div>
+                    <p class="text-center copyright">All right Reserved. &copy;2021 <a class="nav-link" href="/">Mama fish</a></p>
+                </div>
+        </footer>
+
+
 
 <div class="modal-wrapper" id="reservationModal">
 
@@ -138,66 +136,16 @@
                 <input type="number" name="item_category" value="" class="form-control col-6" id="item_category">
                 <div class="invalid-feedback"></div>
             </div>
-        <!-- Footer -->
-        <div class="modal__footer">
-            <div class="btn btn-warning closeModal">Cancel</div>
-            <input type="submit" class="btn btn-primary" id="reserveTable" value="Reserve">
-        </div>
+            <!-- Footer -->
+            <div class="modal__footer">
+                <div class="btn btn-warning closeModal">Cancel</div>
+                <input type="submit" class="btn btn-primary" id="reserveTable" value="Reserve">
+            </div>
         </form>
 
 
     </div>
 </div>
-
-<div class="feedback">
-    <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
-        <div class="alert alert-success">
-            <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
-            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
-        </div>
-    <?php endif; ?>
-    <?php if (\tn\phpmvc\Application::$app->session->getFlash('error')): ?>
-        <div class="alert alert-error">
-            <?php echo \tn\phpmvc\Application::$app->session->getFlash('error'); ?>
-            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
-        </div>
-    <?php endif; ?>
-</div>
-
-        {{content}}
-        <footer class="container-fluid">
-            <div class="row">
-                <div class="col-3">
-                    <h2>links</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About us</a></li>
-                        <li><a href="/menu">Menu</a></li>
-                        <li><a href="/contact">Contact us</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-3">
-                    <h2>Address</h2>
-                    <p>
-                        anniversary towers <br />
-                        along University way <br />
-                        Email:
-                        <a href="mailto:info@mamafish.com">info@mamafish.com</a> Tel:
-                        <a href="tel:254701234567">254701234567</a>
-                    </p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 align-self-center">
-                    <p class="text-center">All right Reserved. &copy;2020 Mama fish</p>
-                </div>
-            </div>
-        </footer>
-
-
-
 
 <script src="./js/menu.js"></script>
 <script src="./js/main.js"></script>

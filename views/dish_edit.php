@@ -35,7 +35,7 @@ $this->title = "Edit Dish";
             <div class="img">
                 <?php
                 $img = str_starts_with($img,'public')?substr($img,7):$img;
-                echo '<img src="'.$img.'" alt="'.$model->item_title.'"/>';
+                echo '<img class="img-thumbnail" src="'.$img.'" alt="'.$model->item_title.'"/>';
                 ?>
             </div>
             <?php endif; ?>

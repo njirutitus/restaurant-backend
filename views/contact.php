@@ -10,54 +10,30 @@ use app\models\ContactForm;
 $this->title = "Contact";
 
 ?>
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="">Contact</a>
-</div>
 
-<main class="container">
-    <h1>Contact Us</h1>
+<!-- Jumbotron -->
+<header class="jumbotron row">
+    <div class="col-6">
+        <h1>Hola, tell us about our services</h1>
+        <p>
+            Tell us everything about our services and how we can improve them to keep you around
+            longer.
+        </p>
 
-    <div class="underline"></div>
+    </div>
+    <div class="col-6">
+        <img class="img-fluid" src="./images/contact-removebg-preview.png" alt="" />
+    </div>
+</header>
 
+<main class="container flex-col-center">
     <section class="row">
-        <div class="col-6">
-            <h2>Address Information</h2>
-            <address>
-                <p>anniversary towers</p>
-                <p>along University way</p>
-                <p>
-                    Email: <a href="mailto:info@mamafish.com">info@mamafish.com</a>
-                </p>
-                <p>Tel: <a href="tel:254701234567">254701234567</a></p>
-                <div>
-                    <button class="bg-primary">
-                        <i class="fas fa-phone"></i> Call us
-                    </button>
-                    <button class="bg-primary">
-                        <i class="fab fa-skype"></i> Skype
-                    </button>
-                    <button class="bg-primary">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                </div>
-            </address>
-        </div>
-
-        <div class="col-6">
-            <h2>Map of our location</h2>
-            <!--Map to be placed here-->
-        </div>
-    </section>
-
-    <!-- Feedback Form-->
-    <section class="container box">
+        <div class="box col-6">
         <h2>Send us your feedback</h2>
         <?php $form = Form::begin('','post')?>
         <?php echo $form->field($model,'subject') ?>
-        <?php echo $form->field($model,'email') ?>
+        <?php echo $form->field($model,'name') ?>
+        <?php echo $form->field($model,'email')->emailField() ?>
         <?php echo new TextareaField($model,'body') ?>
 
         <div class="form-control row">
@@ -73,5 +49,28 @@ $this->title = "Contact";
                 </div>
             </div>
         <?php echo Form::end()?>
+        </div>
+        <div class="col-6 box bg-success">
+            <h2>Address Information</h2>
+            <address>
+                <p>anniversary towers</p>
+                <p>along University way</p>
+                <p>
+                    Email: <a href="mailto:info@mamafish.com">info@mamafish.com</a>
+                </p>
+                <p>Tel: <a href="tel:254701234567">254701234567</a></p>
+                <div class="social">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-phone fa-2x"></i>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i class="fab fa-skype fa-2x"></i>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i class="fab fa-whatsapp fa-2x"></i>
+                    </a>
+                </div>
+            </address>
+        </div>
     </section>
 </main>

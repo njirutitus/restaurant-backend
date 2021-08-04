@@ -8,6 +8,10 @@ $this->title = "Register";
 ?>
 
 <main class="container">
+
+    <div class="flex-col-center">
+        <a href="/"><img src="./images/mama-fish.png" alt="Logo" height="45"></a>
+    </div>
     <h1>Create Account</h1>
 
     <div class="underline"></div>
@@ -34,5 +38,7 @@ $this->title = "Register";
                 </div>
             </div>
         <?php echo tn\phpmvc\form\Form::end(); ?>
+        <p class="b">Already have an account? <a href="/login" class="nav-link"> Login</a></p>
+
     </section>
 </main>

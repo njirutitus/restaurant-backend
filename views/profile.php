@@ -5,13 +5,6 @@ use app\models\User;
 $this->title = "Profile";
 
 ?>
-<!-- Breadcrumb -->
-<div class="breadcrumb row">
-    <a href="/">Home</a>
-    <div class="separator">/</div>
-    <a href="">profile</a>
-</div>
-
 <main class="container">
     <h1>My profile</h1>
 
