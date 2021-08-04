@@ -10,6 +10,7 @@ use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
 use tn\phpmvc\middlewares\AdminMiddleware;
 use tn\phpmvc\middlewares\AuthMiddleware;
+use tn\phpmvc\middlewares\SuperAdminMiddleware;
 use tn\phpmvc\Request;
 use tn\phpmvc\Response;
 use app\models\LoginForm;
@@ -23,7 +24,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->registerMiddleWare(new AuthMiddleware(['profile']));
-        $this->registerMiddleWare(new AdminMiddleware(['users']));
+        $this->registerMiddleWare(new SuperAdminMiddleware(['users']));
 
     }
 
