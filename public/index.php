@@ -32,14 +32,16 @@ $app->router->get('/about',[SiteController::class,'about']);
 $app->router->get('/contact',[SiteController::class,'contact']);
 $app->router->post('/contact',[SiteController::class,'contact']);
 $app->router->get('/admin',[SiteController::class,'dashboard']);
+$app->router->get('/comment',[SiteController::class,'comment']);
+$app->router->post('/comment',[SiteController::class,'comment']);
 
 $app->router->get('/register',[AuthController::class,'register']);
 $app->router->post('/register',[AuthController::class,'register']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
-$app->router->get('/password-reset',[AuthController::class,'resetPassword']);
-$app->router->post('/password-reset',[AuthController::class,'resetPassword']);
+$app->router->get('/password-reset',[AuthController::class, 'resetPasswordRequest']);
+$app->router->post('/password-reset',[AuthController::class, 'resetPasswordRequest']);
 
 $app->router->get('/profile',[AuthController::class,'profile']);
 $app->router->post('/profile',[AuthController::class,'profile']);

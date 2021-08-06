@@ -11,6 +11,7 @@
 namespace app\controllers;
 
 
+use app\models\CommentForm;
 use app\models\Menu;
 use app\models\User;
 use tn\phpmvc\Application;
@@ -43,7 +44,7 @@ class SiteController extends Controller
     public function __construct()
     {
         $this->registerMiddleWare(new AdminMiddleware(['dashboard']));
-
+        $this->registerMiddleWare(new AuthMiddleware(['comment']));
     }
 
     /**
@@ -128,6 +129,21 @@ class SiteController extends Controller
             'users' => $users,
             'menus' => $menus
         ]);
+    }
+
+    public function comment(Request $request): bool|string
+    {
+        $comment = new CommentForm();
+        if($request->isPost()){
+            $data = $request->getBody();
+
+            $comment->loadData($data);
+            if($comment->validate() && $comment->add()) {
+               return json_encode(true);
+            }
+            return json_encode($comment->errors);
+        }
+        return json_encode(true);
     }
 
 }
