@@ -4,9 +4,11 @@
 namespace app\controllers;
 
 
+use app\models\CommentForm;
 use app\models\ContactForm;
 use app\models\Menu;
 use app\models\MenuEditForm;
+use app\models\User;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
 use tn\phpmvc\exception\NotFoundException;
@@ -58,15 +60,25 @@ class MenuController extends Controller
     /**
      * @throws NotFoundException
      */
-    public function menuitem(Request $request)
+    public function menuitem(Request $request, Response $response)
     {
         if ($request->isGet()) {
             $data = $request->getBody();
+            if(!array_key_exists('id',$data)) {
+                $response->redirect('/menu');
+                exit();
+            }
             $id = $data['id'];
             $result = Menu::findOne(['id' => $id]);
+            $comments = CommentForm::findMany(['menu'=> $id],'date DESC');
+            $user = new User();
+            $users = $user::findAll();
+
             if ($result)
             return $this->render('menu_view',[
-                'menuitem' => $result
+                    'menuitem' => $result,
+                    'comments' => $comments,
+                    'users' => $users
                 ]
             );
             else
