@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="./css/main.css" />
     <script src="https://unpkg.com/htmx.org@1.4.1"></script>
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="./js/9ad9a54963.js" crossorigin="anonymous"></script>
 
     <title>Mama Fish Restaurant: <?php echo $this->title ?></title>
 </head>
@@ -88,10 +88,10 @@
         {{content}}
         <footer class="container-fluid">
                 <div class="social">
-                    <a href="" class="nav-link"><i class="fab fa-twitter"></i></a>
-                    <a href="" class="nav-link"><i class="fab fa-instagram"></i></a>
-                    <a href="" class="nav-link"><i class="fab fa-facebook"></i></a>
-                    <a href="" class="nav-link"><i class="fab fa-youtube"></i></a>
+                    <a href="" class="nav-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="" class="nav-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="" class="nav-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="" class="nav-link" title="Youtube"><i class="fab fa-youtube"></i></a>
                 </div>
                 <div>
                     <p class="text-center copyright">All right Reserved. &copy;2021 <a class="nav-link" href="/">Mama fish</a></p>
