@@ -99,7 +99,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function resetPassword(Request $request)
+    public function resetPasswordRequest(Request $request)
     {
         $this->setLayout('auth');
         $user = new PasswordResetForm();
