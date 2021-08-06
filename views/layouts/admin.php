@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/admin.css" />
 
-    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="../js/9ad9a54963.js" crossorigin="anonymous"></script>
 
     <title>Mama Fish Restaurant Administration</title>
 </head>
