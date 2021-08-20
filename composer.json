@@ -12,8 +12,9 @@
         }
     },
     "require": {
-        "tn/php-mvc-core": "^1.0.13",
+        "tn/php-mvc-core": "^1.0.15",
         "vlucas/phpdotenv": "^5.3",
-        "phpmailer/phpmailer": "^6.5"
+        "phpmailer/phpmailer": "^6.5",
+      "ext-curl": "*"
     }
 }
