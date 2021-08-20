@@ -34,6 +34,7 @@ $this->title = "Menu";
         <div class="col-6">
             <h2>Comments</h2>
             <ul class="list-unstyled">
+                <div class="scrollableList">
                 <?php
                     foreach ($comments as $comment) {
                         $author = "";
@@ -50,6 +51,7 @@ $this->title = "Menu";
                         ";
                     }
                 ?>
+                </div>
 
                 <li>
                     <form action="" id="commentForm">

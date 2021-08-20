@@ -7,8 +7,8 @@ namespace app\models;
 class CommentForm extends \tn\phpmvc\DbModel
 {
     public string $comment = '';
-    public int $menu = 0;
-    public int $author = 0;
+    public string $menu = '';
+    public string $author = '';
 
 
 
@@ -41,7 +41,7 @@ class CommentForm extends \tn\phpmvc\DbModel
         return parent::save();
     }
 
-    public function fetchAll($where)
+    public function fetchAll($where): array
     {
         return parent::findMany($where);
     }
