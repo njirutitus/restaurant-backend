@@ -3,7 +3,10 @@
 
 namespace app\models;
 
+use tn\phpmvc\Application;
 use tn\phpmvc\DbModel;
+use tn\phpmvc\utils\Mailer;
+use tn\phpmvc\View;
 
 /**
  * Class User
@@ -41,5 +44,22 @@ class PasswordResetForm extends DbModel
         return [
             'email' => 'Email'
         ];
+    }
+
+    public function send($url): bool
+    {
+        $view = new View();
+        $content = $view->renderView('password',['url'=>$url]);
+        $mail = Application::$app->mailer;
+        $mail->to(array(array('email'=>$this->email)));
+        $mail->replyTo(array(array('email'=>'royalkinginvest@gmail.com','name' => 'Royal King Investment')));
+        $mail->from(array('email'=>'royalkinginvest@gmail.com','name' => 'Royal King Investment'));
+        $mail->subject('Password Reset');
+        $mail->body($content);
+        $mail->html(true);
+
+        return $mail->send();
+
+
     }
 }
