@@ -34,6 +34,14 @@ $app->router->post('/contact',[SiteController::class,'contact']);
 $app->router->get('/admin',[SiteController::class,'dashboard']);
 $app->router->get('/comment',[SiteController::class,'comment']);
 $app->router->post('/comment',[SiteController::class,'comment']);
+$app->router->get('/reserve',[SiteController::class,'reserve']);
+$app->router->post('/reserve',[SiteController::class,'reserve']);
+$app->router->get('/cart',[SiteController::class,'cart']);
+$app->router->post('/cart',[SiteController::class,'cart']);
+$app->router->get('/cart-items',[SiteController::class,'cartItems']);
+$app->router->post('/cart-items',[SiteController::class,'cartItems']);
+$app->router->get('/checkout',[SiteController::class,'checkout']);
+$app->router->post('/checkout',[SiteController::class,'checkout']);
 
 $app->router->get('/register',[AuthController::class,'register']);
 $app->router->post('/register',[AuthController::class,'register']);
@@ -56,8 +64,10 @@ $app->router->get('/admin_dishes',[MenuController::class,'dishes']);
 $app->router->get('/admin_dishes_delete',[MenuController::class,'delete_menu']);
 $app->router->get('/admin_dish_edit',[MenuController::class,'edit_menu']);
 $app->router->post('/admin_dish_edit',[MenuController::class,'edit_menu']);
+
+
 $app->router->get('/admin_users',[AuthController::class,'users']);
-$app->router->get('/file',[FileController::class,'getFile']);
+$app->router->get('/file',[SiteController::class,'getFile']);
 
 $app->run();
 
