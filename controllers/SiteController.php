@@ -13,6 +13,7 @@ namespace app\controllers;
 
 use app\models\CommentForm;
 use app\models\Menu;
+use app\models\ReservationForm;
 use app\models\User;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
@@ -26,6 +27,7 @@ use app\models\ContactForm;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use tn\phpmvc\utils\Filesystem;
 
 /**
  * Class SiteController
@@ -44,7 +46,7 @@ class SiteController extends Controller
     public function __construct()
     {
         $this->registerMiddleWare(new AdminMiddleware(['dashboard']));
-        $this->registerMiddleWare(new AuthMiddleware(['comment']));
+//        $this->registerMiddleWare(new AuthMiddleware(['comment']));
     }
 
     /**
@@ -119,15 +121,18 @@ class SiteController extends Controller
     {
         $menu = new Menu();
         $user= new User();
+        $comments = new CommentForm();
 
         $menus = count($menu->fetchAll());
         $users = count($user::findAll());
+        $comments = count($comments::findAll());
 
 
         $this->setLayout('admin');
         return $this->render('dashboard',[
             'users' => $users,
-            'menus' => $menus
+            'menus' => $menus,
+            'comments' => $comments
         ]);
     }
 
@@ -144,6 +149,56 @@ class SiteController extends Controller
             return json_encode($comment->errors);
         }
         return json_encode(true);
+    }
+
+    public function reserve(Request $request): bool|string
+    {
+        $reservation = new ReservationForm();
+        if($request->isPost()){
+            $data = $request->getBody();
+            $reservation->loadData($data);
+            if($reservation->validate() && $reservation->add()) {
+                return json_encode(true);
+            }
+            return json_encode($reservation->errors);
+        }
+        return json_encode(true);
+    }
+
+    public function cart(Request $request)
+    {
+        return $this->render('cart');
+    }
+
+    public function cartItems(Request $request)
+    {
+        $menu = new Menu();
+        $items = [];
+        if($request->isPost()){
+            $data = $request->getBody();
+            foreach ($data as $cart) {
+               if(gettype($cart) === 'object')
+                $cart = json_decode(json_encode($cart), true);
+                $item = $menu::findOne(['id'=>$cart['id']]);
+                if($item){
+                    $item->quantity = $cart['quantity'];
+                    array_push($items,$item);
+                }
+            }
+        }
+        return json_encode($items);
+    }
+
+    public function checkout()
+    {
+        return $this->render('checkout');
+    }
+
+    public function getFile(Request $request)
+    {
+        $file = new Filesystem();
+        $data  = $request->getBody();
+        $file->getFile($data['file']);
     }
 
 }
