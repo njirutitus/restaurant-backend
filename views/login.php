@@ -6,7 +6,7 @@ use app\models\User;
 $this->title = "Login";
 
 ?>
-<main class="container">
+<main class="container flex-col-center">
     <div class="flex-col-center">
         <a href="/"><img src="./images/mama-fish.png" alt="Logo" height="45"></a>
     </div>
