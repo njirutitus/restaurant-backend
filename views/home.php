@@ -25,7 +25,7 @@ $this->title = "Home";
         </div>
         <div class="underline"></div>
         <div class="highlight">
-            <div class="item-img">
+            <div class="highlight-img">
                 <img
                         src="./images/pizza.png"
                         alt="pizza"
@@ -49,7 +49,7 @@ $this->title = "Home";
         </div>
         <div class="underline"></div>
         <div class="highlight">
-            <div class="item-img">
+            <div class="highlight-img">
                 <img
                         src="./images/buffet.png"
                         alt="Buffet"
@@ -74,7 +74,7 @@ $this->title = "Home";
         </div>
         <div class="underline"></div>
         <div class="highlight">
-            <div class="item-img">
+            <div class="highlight-img">
                 <img
                         src="./images/titus.jpg"
                         alt="Chef Titus"
