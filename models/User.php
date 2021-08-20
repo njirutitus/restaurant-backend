@@ -25,6 +25,8 @@ class User extends UserModel
     public int $status = self::STATUS_INACTIVE;
     public string $password = '';
     public string $confirmPassword = '';
+    public int $is_staff = 0;
+    public int $is_super_admin = 0;
 
     public static function tableName(): string
     {
@@ -43,7 +45,7 @@ class User extends UserModel
         return parent::save();
     }
 
-    public function updateProfile()
+    public function updateProfile(): bool
     {
         $this->password = password_hash($this->password,PASSWORD_DEFAULT);
         $this->status = self::STATUS_INACTIVE;
@@ -63,7 +65,7 @@ class User extends UserModel
 
     public function  attributes(): array
     {
-        return ['firstname','lastname','email','status','password'];
+        return ['firstname','lastname','email','status','password','is_super_admin','is_staff'];
     }
     public function  labels(): array
     {
@@ -72,7 +74,8 @@ class User extends UserModel
             'lastname' => 'Last Name',
             'email' => 'Email',
             'password' => 'Password',
-            'confirmPassword' => 'Confirm Password'
+            'confirmPassword' => 'Confirm Password',
+            'is_super_admin' => 'Is super Admin? (0 for no, 1 for yes)'
         ];
     }
 
