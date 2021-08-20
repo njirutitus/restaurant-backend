@@ -2,6 +2,7 @@
 /**
  * @var $users
  * @var $menus
+ * @var $comments
 */
 ?>
 
@@ -10,7 +11,7 @@
         <a href="/admin_users" class="btn">Users: <?php echo $users;?></a>
         <a href="/admin_dishes" class="btn">Dishes: <?php echo $menus;?></a>
         <button class="btn">Orders: 200</button>
-        <button class="btn">Comments: 6000</button>
+        <button class="btn">Comments: <?php echo $comments;?></button>
     </div>
     <canvas id="myChart" width="400" height="400"></canvas>
 </main>
