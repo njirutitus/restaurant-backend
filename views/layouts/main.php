@@ -56,15 +56,15 @@
     </ul>
     <?php  if (\tn\phpmvc\Application::isGuest()): ?>
     <div>
-<!--        <a href="" class="nav-link"> <i class="fas fa-cart-plus"></i></a>-->
+        <a href="/cart" class="nav-link"> <i class="fas fa-cart-plus"></i><sup id="cartTotal" class="bg-warning text-center rounded p-3">0</sup> cart</a>
         <a href="/login" class="nav--button"> <i class="fas fa-sign-in-alt"></i> Login</a>&nbsp;&nbsp;&nbsp;
 <!--        <a href="/register" class="nav-link"> <i class="fas fa-user-plus"></i> Sign Up</a>-->
     </div>
     <?php else: ?>
     <div>
-        <a href="" class="nav-link"> <i class="fas fa-cart-plus"></i></a>
+        <a href="/cart" class="nav-link"> <i class="fas fa-cart-plus"></i><sup id="cartTotal" class="bg-warning text-center rounded p-3">0</sup> cart</a>
         <a href="/profile" class="nav-link"> Profile</a>&nbsp;&nbsp;&nbsp;
-        <a href="/logout" class="nav-link">  Welcome <?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
+        <a href="/logout" class="nav-link"><?php echo \tn\phpmvc\Application::$app->user->getDisplayName(); ?> (Logout)</a>
     </div>
     <?php endif; ?>
 
@@ -73,14 +73,16 @@
 <div class="feedback">
     <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
         <div class="alert alert-success">
+            <ion-icon name="checkmark-outline" size="large"></ion-icon>
             <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
             <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
         </div>
     <?php endif; ?>
     <?php if (\tn\phpmvc\Application::$app->session->getFlash('error')): ?>
         <div class="alert alert-error">
+            <ion-icon name="alert-circle-outline" size="large"></ion-icon>
             <?php echo \tn\phpmvc\Application::$app->session->getFlash('error'); ?>
-            <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
+            <span class="close-icon" id="close"><ion-icon name="close-sharp" size="large" id="close"></ion-icon></span>
         </div>
     <?php endif; ?>
 </div>
@@ -112,28 +114,28 @@
         </div>
 
         <!-- Content -->
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" id="reservationForm">
             <div class="form-group row mb-3">
-                <label class="col-3">Full Name</label>
-                <input type="text" name="item_title" value="" class="form-control col-6" id="item_title">
+                <label class="col-3" for="reserved_by">Full Name</label>
+                <input type="text" name="reserved_by" value="" class="form-control col-6" id="reserved_by">
                 <div class="invalid-feedback"></div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-3">Date</label>
-                <input type="date" name="price" value="" class="form-control col-6" id="price">
+                <label class="col-3" for="date">Date</label>
+                <input type="date" name="date" value="" class="form-control col-6" id="date">
                 <div class="invalid-feedback"></div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-3">Time</label>
-                <input type="time" name="price" value="" class="form-control col-6" id="price">
+                <label class="col-3" for="time">Time</label>
+                <input type="time" name="time" value="" class="form-control col-6" id="time">
                 <div class="invalid-feedback"></div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-3">Number of Adults</label>
-                <input type="number" name="item_category" value="" class="form-control col-6" id="item_category">
+                <label class="col-3" for="adults">Number of Adults</label>
+                <input type="number" name="adults" min="1"  value="1" class="form-control col-6" id="adults">
                 <div class="invalid-feedback"></div>
             </div>
             <!-- Footer -->
@@ -149,6 +151,8 @@
 
 <script src="./js/menu.js"></script>
 <script src="./js/main.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     </body>
 </html>

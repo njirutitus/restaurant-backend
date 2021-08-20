@@ -78,12 +78,14 @@
         <div class="feedback">
             <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
                 <div class="alert alert-success">
+                    <ion-icon name="checkmark-outline" size="large"></ion-icon>
                     <?php echo \tn\phpmvc\Application::$app->session->getFlash('success'); ?>
-                    <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
+                    <span class="close-icon" id="close"><ion-icon name="close-sharp" size="large" id="close"></ion-icon></span>
                 </div>
             <?php endif; ?>
             <?php if (\tn\phpmvc\Application::$app->session->getFlash('error')): ?>
                 <div class="alert alert-error">
+                    <ion-icon name="alert-circle-outline" size="large"></ion-icon>
                     <?php echo \tn\phpmvc\Application::$app->session->getFlash('error'); ?>
                     <span class="close-icon" id="close"><i class="fas fa-times"></i></span>
                 </div>
