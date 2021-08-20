@@ -24,6 +24,7 @@ class ProfileForm extends UserModel
     public string $email = '';
     public int $status = self::STATUS_INACTIVE;
     public string $password = '';
+    public string $newPassword = '';
     public string $confirmPassword = '';
 
     public static function tableName(): string
@@ -47,7 +48,7 @@ class ProfileForm extends UserModel
     {
         $this->password = password_hash($this->password,PASSWORD_DEFAULT);
         $this->status = self::STATUS_INACTIVE;
-        return parent::update(['id'=>Application::$app->user['id']]);
+        return parent::update(['id'=>Application::$app->user->id]);
     }
 
     public function rules(): array
@@ -56,8 +57,7 @@ class ProfileForm extends UserModel
             'firstname' => [self::RULE_REQUIRED],
             'lastname' => [self::RULE_REQUIRED],
             'email' => [self::RULE_REQUIRED,self::RULE_EMAIL],
-            'password' => [self::RULE_REQUIRED,[self::RULE_MIN,'min' => 8],[self::RULE_MAX,'max'=>24]],
-            'confirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'password']]
+            'confirmPassword' => [[self::RULE_MATCH,'match' => 'newPassword']]
         ];
     }
 
@@ -71,7 +71,8 @@ class ProfileForm extends UserModel
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Current Password',
+            'newPassword' => 'New Password',
             'confirmPassword' => 'Confirm Password'
         ];
     }
