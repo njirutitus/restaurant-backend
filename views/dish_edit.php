@@ -20,7 +20,7 @@ $this->title = "Edit Dish";
     <a href="">Edit Dish</a>
 </div>
 
-<main class="container">
+<main class="container flex-col-center">
     <h1>Edit Menu Item</h1>
 
     <div class="underline"></div>
@@ -49,13 +49,9 @@ $this->title = "Edit Dish";
         <?php echo $form->field($model,'id')->hiddenField() ?>
         <?php echo new TextareaField($model,'desc') ?>
         <div class="form-control row">
+            <div class="col-3"></div>
             <div class="col-6">
-                <input
-                    type="submit"
-                    class="form-control btn bg-success"
-                    value="Update"
-                    id="submit"
-                />
+                <input type="submit" class="btn bg-success" name="submit" value="Update" id="submit">
             </div>
         </div>
         <?php echo Form::end()?>

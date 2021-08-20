@@ -6,8 +6,8 @@ use app\models\PasswordResetForm;
 $this->title = "Reset password";
 
 ?>
-<main class="container">
-    <div class="flex-col-center">
+<main class="container flex-col-center">
+    <div>
         <a href="/"><img src="./images/mama-fish.png" alt="Logo" height="45"></a>
     </div>
 

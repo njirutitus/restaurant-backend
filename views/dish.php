@@ -19,7 +19,7 @@ $this->title = "New Dish";
     <a href="">New Dish</a>
 </div>
 
-<main class="container">
+<main class="container flex-col-center">
     <h1>Add New Menu Item</h1>
 
     <div class="underline"></div>
@@ -41,7 +41,7 @@ $this->title = "New Dish";
             <div class="col-6">
                 <input
                     type="submit"
-                    class="form-control btn bg-success"
+                    class="btn bg-primary"
                     value="Add"
                     id="submit"
                 />
