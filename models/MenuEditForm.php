@@ -52,12 +52,12 @@ class MenuEditForm extends \tn\phpmvc\DbModel
         return [
             'id' => [self::RULE_REQUIRED],
             'item_title' => [self::RULE_REQUIRED],
-        'item_category' => [self::RULE_REQUIRED],
-        'price' => [self::RULE_REQUIRED,self::RULE_NUMBER],
-        'img' => [[self::RULE_MAX_FILE_SIZE,'max_size' => 10000000],
-            [self::RULE_VALID_FILE_TYPE,"types" => array('image/jpeg', 'image/png', 'image/gif')],
-        [self::RULE_UPLOADED]],
-        'desc' => [self::RULE_REQUIRED],
+            'item_category' => [self::RULE_REQUIRED],
+            'price' => [self::RULE_REQUIRED,self::RULE_NUMBER],
+            'img' => [[self::RULE_MAX_FILE_SIZE,'max_size' => 10000000],
+                [self::RULE_VALID_FILE_TYPE,"types" => array('image/jpeg', 'image/png', 'image/gif')],
+            [self::RULE_UPLOADED]],
+            'desc' => [self::RULE_REQUIRED],
         ];
     }
 
