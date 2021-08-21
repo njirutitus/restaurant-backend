@@ -11,7 +11,7 @@ class m0003_initial
         `category` tinytext NOT NULL,
         `price` double NOT NULL,
         `img` text NOT NULL,
-        `desc` text NOT NULL DEFAULT 1,
+        `desc` text NOT NULL,
         `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
         $db->pdo->exec($SQL);
