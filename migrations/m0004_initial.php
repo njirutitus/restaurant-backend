@@ -8,7 +8,7 @@ class m0004_initial
         $SQL = "CREATE TABLE IF NOT EXISTS `user_token` (
         `id` SERIAL,
         `user` BIGINT UNSIGNED NOT NULL,
-        `token` MEDIUMTEXT NOT NULL UNIQUE,
+        `token` MEDIUMTEXT,
         `expires_at` DATETIME NOT NULL,
         `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
         FOREIGN KEY(`user`) REFERENCES user(id) ON DELETE RESTRICT ON UPDATE CASCADE
