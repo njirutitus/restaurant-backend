@@ -103,6 +103,7 @@ body {
   height: 100vh;
   background-color: #003d00;
   flex-shrink: 0;
+  display: none;
 }
 
 .table th {
