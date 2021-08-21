@@ -5,7 +5,7 @@ class m0006_initial
     public function up()
     {
         $db = \tn\phpmvc\Application::$app->db;
-        $SQL = "ALTER TABLE `contact` ADD IF NOT EXISTS (name TINYTEXT NOT NULL)" ;
+        $SQL = "ALTER TABLE `contact` ADD (name TINYTEXT NOT NULL)" ;
         $db->pdo->exec($SQL);
     }
 
