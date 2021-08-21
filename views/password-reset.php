@@ -12,7 +12,8 @@ $this->title = "Reset password";
     </div>
 
     <!-- Feedback Form-->
-    <section class="container box">
+    <section class="row">
+        <div class="col-6 box">
         <h2> Forgot Your Password? </h2>
         <p>We get it, stuff happens. Just enter your email below and we'll send you instructions to reset your password!</p>
             <?php $form = tn\phpmvc\form\Form::begin("","post") ?>
@@ -32,5 +33,6 @@ $this->title = "Reset password";
         <?php echo tn\phpmvc\form\Form::end(); ?>
         <p class="b">New here? <a href="/register" class="nav-link"> Create an account</a></p>
         <p class="b">Already have an account? <a href="/login" class="nav-link"> Login</a></p>
+        </div>
     </section>
 </main>
