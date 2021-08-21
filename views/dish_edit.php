@@ -27,7 +27,8 @@ $this->title = "Edit Dish";
     <br>
 
     <!-- Form-->
-    <section class="box">
+    <section class="row">
+        <div class="col-6 box">
         <h2>Menu Details</h2>
         <?php $form = Form::begin('/admin_dish_edit','post')?>
         <div class="img-container">
@@ -55,5 +56,6 @@ $this->title = "Edit Dish";
             </div>
         </div>
         <?php echo Form::end()?>
+        </div>
     </section>
 </main>

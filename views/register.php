@@ -17,8 +17,9 @@ $this->title = "Register";
     <div class="underline"></div>
     <br>
 
-    <!-- Feedback Form-->
-    <section class="container box">
+    <!-- Registration Form-->
+    <section class="row">
+        <div class="col-6 box">
         <?php $form = tn\phpmvc\form\Form::begin("","post") ?>
         <?php echo $form->field($model,'firstname') ?>
         <?php echo $form->field($model,'lastname') ?>
@@ -39,6 +40,6 @@ $this->title = "Register";
             </div>
         <?php echo tn\phpmvc\form\Form::end(); ?>
         <p class="b">Already have an account? <a href="/login" class="nav-link"> Login</a></p>
-
+        </div>
     </section>
 </main>

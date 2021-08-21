@@ -21,7 +21,7 @@ $this->title = "Menu";
     <div class="underline"></div>
     <br />
 
-    <div class="row">
+    <div class="row flex-row-space-evenly">
         <div class="col-6">
             <?php
             $img = str_starts_with($menuitem->img,'public')?substr($menuitem->img,7):$menuitem->img;

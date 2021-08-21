@@ -15,8 +15,9 @@ $this->title = "Login";
     <div class="underline"></div>
     <br>
 
-    <!-- Feedback Form-->
-    <section class="container box">
+    <!-- Login Form-->
+    <section class="row">
+        <div class="col-6 box">
             <?php $form = tn\phpmvc\form\Form::begin("","post") ?>
                 <?php echo $form->field($model,'email') ?>
                 <div class="flex-col-end"><a href="/password-reset" class="nav-link"> Forgot Password?</a></div>
@@ -35,5 +36,6 @@ $this->title = "Login";
                 </div>
         <?php echo tn\phpmvc\form\Form::end(); ?>
         <p class="b">New here? <a href="/register" class="nav-link"> Create an account</a></p>
+        </div>
     </section>
 </main>

@@ -106,7 +106,7 @@
 
     <div class="modal">
         <!-- Header -->
-        <div class="modal__header">
+        <div class="modal__header mb-3">
             <h2>Reservation</h2>
             <span class="close-icon closeModal">
                 <i class="fas fa-times fa-2x"></i>

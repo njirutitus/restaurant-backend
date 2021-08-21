@@ -26,14 +26,17 @@ $this->title = "New Dish";
     <br>
 
     <!-- Feedback Form-->
-    <section class="box">
+    <section class="row">
+        <div class="col-6 box">
         <h2>Meal Details</h2>
         <?php $form = Form::begin('','post')?>
         <?php echo $form->field($model,'item_title') ?>
         <?php echo $form->field($model,'price') ?>
         <?php echo $form->field($model,'item_category') ?>
 <!--        <div class='file-input'>-->
+            <div class="flex-col-center">
         <?php echo $form->field($model,'img')->fileField() ?>
+            </div>
 <!--        </div>-->
         <?php echo new TextareaField($model,'desc') ?>
         <div class="form-control row">
@@ -48,5 +51,6 @@ $this->title = "New Dish";
             </div>
         </div>
         <?php echo Form::end()?>
+        </div>
     </section>
 </main>
