@@ -6,8 +6,8 @@ use tn\phpmvc\Application;
 use app\controllers\SiteController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-//$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-//$dotenv->load();
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->safeLoad();
 
 if (!getenv('DB_DSN')) {
     putenv("DB_DSN=$_ENV[DB_DSN]");
