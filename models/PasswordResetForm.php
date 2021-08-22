@@ -57,9 +57,8 @@ class PasswordResetForm extends DbModel
         $mail->subject('Password Reset');
         $mail->body($content);
         $mail->html(true);
-
+        ob_start();
         return $mail->send();
-
 
     }
 }
