@@ -1,6 +1,6 @@
 <?php
 
-class m0009_initial
+class m0006_initial
 {
     public function up()
     {
