@@ -1,6 +1,11 @@
+import setSession, {getSession,removeSession,clearSession} from './modules/session'
+
+
 const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("main-content");
 const file_input = document.querySelectorAll('input[type="file"]');
+const accountToggle = document.querySelector('#accountToggle')
+const dropdownContent = document.querySelector('.dropdown-content')
 
 
 const toggle = document.getElementById("sidebarToggleTop");
@@ -38,21 +43,7 @@ function setCartProducts() {
   else setSession('cart',cart)
 }
 
-function setSession(key,value) {
-  localStorage.setItem(key, JSON.stringify(value))
-}
 
-function getSession(key) {
-  return JSON.parse(localStorage.getItem(key))
-}
-
-function removeSession(key) {
-  localStorage.removeItem(key)
-}
-
-function clearSession() {
-  localStorage.clear()
-}
 
 function displayOrderItems()
 {
@@ -62,7 +53,6 @@ function displayOrderItems()
     items = getSession('cart')
     const res  = postData('/cart-items',items)
     res.then(data => {
-      console.log(data)
       let subtotal = 0
       const orderItems = data.map(item => {
         let img = ''
@@ -105,7 +95,6 @@ function displayCartItems() {
     items = getSession('cart')
     const res  = postData('/cart-items',items)
         res.then(data => {
-          console.log(data)
           let subtotal = 0
           const cartItems = data.map(item => {
             let img = ''
@@ -118,12 +107,10 @@ function displayCartItems() {
                         <td>
                             <img src="${img}" alt="${item.item_title}" width="50" height="50" /> <br /> 
                             ${item.item_title} 
-                            <a onclick="removeFromCart(${item.id})">
-                                <i class="fas fa-trash-alt ms-2 text-error"></i>
-                            </a>
+                            <i id="removeFromCart" data-id="${item.id}" data-title="${item.item_title}" class="fas fa-trash-alt ms-2 text-error"></i>
                         </td>
                         <td> ${item.price}</td>
-                        <td><div class="flex-row-even"><ion-icon onclick="reduceCart(${item.id})" name="remove-circle-outline" size="large"></ion-icon><span>${item.quantity}</span><ion-icon onclick="addToCart(${item.id})" name="add-circle-sharp" size="large"></ion-icon></div></td>
+                        <td><div class="flex-row-even"><ion-icon id="reduceCart" data-id="${item.id}" data-title="${item.item_title}" name="remove-circle-outline" size="large"></ion-icon><span>${item.quantity}</span><ion-icon id="addToCart" data-id="${item.id}" data-title="${item.item_title}" name="add-circle-sharp" size="large"></ion-icon></div></td>
                         <td>${item.quantity*item.price} </td>
                     </tr>`
           })
@@ -163,7 +150,8 @@ function countItems(items) {
     cartTotal.innerText = totalItems
 }
 
-function removeFromCart(id) {
+function removeFromCart(id,title) {
+  id = parseInt(id)
   let newItems = []
   let items = []
   if (getSession('cart'))
@@ -175,12 +163,12 @@ function removeFromCart(id) {
   })
   console.log(newItems)
   setSession('cart', newItems)
-  setSession('success', 'Dish removed from Cart');
+  setSession('success', `${title} removed from Cart`);
   showFeedBack()
   displayCartItems()
 }
 
-function addToCart(id) {
+function addToCart(id,title) {
       const product = parseInt(id)
       const cartItem = {
         "id": product,
@@ -194,10 +182,10 @@ function addToCart(id) {
         let cart = getSession('cart')
         if (!exists(product, cart)) {
           cart.push(cartItem)
-          setSession('success', 'Dish added to Cart');
+          setSession('success', `${title} added to Cart`);
         } else {
           cart = updateCart(product, cart)
-          setSession('success', 'Order Quantity Updated');
+          setSession('success', `${title} Order Quantity Updated`);
         }
         setSession('cart',cart)
       }
@@ -212,7 +200,6 @@ function addToCart(id) {
       countItems(getSession('cart'))
       showFeedBack()
       displayCartItems()
-
 }
 
 function getCartQuantity(id,items) {
@@ -246,7 +233,8 @@ function valueExists(key,items) {
   return value
 }
 
-function reduceCart(id) {
+function reduceCart(id,title) {
+  id = parseInt(id)
   const newItems = []
   let items = []
   if (getSession('cart'))
@@ -257,10 +245,12 @@ function reduceCart(id) {
     }
     if(item.quantity > 0)
     newItems.push(item)
+    else
+      setSession('success', `${title} removed from cart`);
   })
   setSession('cart', newItems)
   if(exists(id,newItems)) {
-    setSession('success', 'Order quantity reduced by 1');
+    setSession('success', `${title} Order quantity reduced by 1`);
   }
   else {
     const newArray = removeFromArray(id,getSession('cartProducts'))
@@ -338,7 +328,7 @@ commentForm.addEventListener('submit',(e) => {
           else {
             setSession('error', 'You must be logged in to comment.');
           }
-          // window.location.replace(`/menuitem?id=${menuId}`);
+          window.location.replace(`/menuitem?id=${menuId}`);
           showFeedBack()
         });
   }
@@ -402,11 +392,16 @@ if(deleteDish) {
     const url = `/admin_dishes_delete?id=${Id}`
     const response = await fetch(url)
     response.json().then(result => {
-      if (result) {
+      if (result === 'true') {
         console.log('Success');
-        window.location.replace("/admin_dishes");
+        setSession('success','Item deleted Successfully')
       }
-      else console.error('Unsuccessful')
+      else  {
+        console.error('Unsuccessful')
+        setSession('error',result)
+
+      }
+      window.location.replace("/admin_dishes");
     })
   })
 }
@@ -466,42 +461,22 @@ function showFeedBack() {
 }
 
 if(toggle)
-toggle.addEventListener('click',function (){
-  setIcon()
-  sidebarToggle()
-})
+toggle.addEventListener('click',(e) => toggleMenu(e))
 
-function sidebarToggle() {
-    if (sidebar.style.display === "none") {
-    sidebar.style.display = "block";
-    sidebar.style.zIndex = "99999";
+function toggleMenu(e) {
+  if (sidebar.classList.contains("show")) {
+    sidebar.classList.remove("show");
+    e.currentTarget.innerHTML = '<i class="fas fa-bars"></i>';
   } else {
-    sidebar.style.display = "none";
-    content.style.width = "100%";
+    sidebar.classList.add("show");
+    e.currentTarget.innerHTML = '<ion-icon name="arrow-back-sharp" size="medium"></ion-icon>';
   }
 }
 
-function setIcon() {
-  let close_icon = document.createElement("ion-icon");
-  close_icon.setAttribute('name','arrow-back-sharp');
-  close_icon.setAttribute('size','medium');
-  let menu_icon = document.createElement('i');
-  menu_icon.classList.add('fa');
-  menu_icon.classList.add('fa-bars');
-
-  if (sidebar.style.display === "none") {
-    toggle.textContent = "";
-    toggle.appendChild(close_icon);
-  } else {
-    toggle.textContent = "";
-    toggle.appendChild(menu_icon);
-  }
-}
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
 
 function displayMenuItems(menuItems) {
   let displayMenu = menuItems.map(function (item) {
@@ -512,22 +487,19 @@ function displayMenuItems(menuItems) {
       img = (item.img).slice(7)
     else img = item.img
     if(qty>0)
-      icon = `<ion-icon onclick="reduceCart(${item.id})" name="remove-circle-outline" size="large"></ion-icon><span>${qty}</span><ion-icon onclick="addToCart(${item.id})" name="add-circle-sharp" size="large"></ion-icon>`
+      icon = `<ion-icon name="checkmark-outline" size="large"></ion-icon>`
     else
-      icon = `<ion-icon onclick="addToCart(${item.id})" name="cart-outline" size="large"></ion-icon>`
+      icon = `<ion-icon id="addToCart" data-title="${item.item_title}" data-id="${item.id}" name="cart-outline" size="large"></ion-icon>`
     return ` <div class="menu-item">
     <div class="item-img">
-    <a href="/menuitem?id=${item.id}"><img class="img-thumbnail" src="${img}" alt="${item.item_title}" /></a>
+    <a href="/menuitem?id=${item.id}"><img class="menu-img" src="${img}" alt="${item.item_title}" /></a>
     </div>
     
     <div class="item-description">
       <div class="item-header">
-        <h4>${item.item_title} <ion-icon name="flame-outline" style="color: red"></ion-icon> </h4>
+        <h4>${item.item_title}</h4>
         <i class="far fa-star ms-2"></i>
       </div>
-      <p>
-      ${item.desc}
-      </p>
       <div class="item-footer">
           <h3>KES ${item.price}</h3>
           ${icon}
@@ -614,6 +586,23 @@ window.addEventListener('DOMContentLoaded',function (){
   }
   showFeedBack();
   displayCartItems()
-  if (sidebar)
-    setIcon()
+})
+
+document.addEventListener('click',(e) => {
+  if(e.target.id === 'addToCart') {
+    let id = e.target.dataset.id
+    let title = e.target.dataset.title
+    addToCart(id,title)
+  }
+  if(e.target.id === 'removeFromCart') {
+    let id = e.target.dataset.id
+    let title = e.target.dataset.title
+    removeFromCart(id,title)
+  }
+
+  if(e.target.id === 'reduceCart') {
+    let id = e.target.dataset.id
+    let title = e.target.dataset.title
+    reduceCart(id,title)
+  }
 })
