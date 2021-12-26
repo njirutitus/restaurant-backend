@@ -9,7 +9,7 @@ use tn\phpmvc\form\Form;
 use tn\phpmvc\form\TextareaField;
 use tn\phpmvc\View;
 
-$this->title = "New Dish";
+$this->title = "Dishes";
 
 ?>
 <!-- Breadcrumb -->
@@ -53,6 +53,7 @@ $this->title = "New Dish";
                     echo '<td>
                         <button class="btn bg-warning action-btn" data-target="deleteModalWrapper" data-table="'.$table.'" data-id="'.$dish->$key.'" data-title="'.$dish->item_title.'">Delete</button>
                         <a class="btn bg-success" href="/admin_dish_edit?id='.$dish->$key.'">Edit</a>
+                        <a class="btn bg-primary" href="/admin_dish_comments?id='.$dish->$key.'">View comments</a>
                     </td>
                 </tr>';
             }

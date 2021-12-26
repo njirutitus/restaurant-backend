@@ -12,19 +12,19 @@ $this->title = "Contact";
 ?>
 
 <!-- Jumbotron -->
-<header class="jumbotron row">
-    <div class="col-6">
-        <h1>Hola, tell us about our services</h1>
-        <p>
-            Tell us everything about our services and how we can improve them to keep you around
-            longer.
-        </p>
-
-    </div>
-    <div class="col-6">
-        <img class="img-fluid" src="./images/contact-removebg-preview.png" alt="" />
-    </div>
-</header>
+<!--<header class="jumbotron row">-->
+<!--    <div class="col-6">-->
+<!--        <h1>Hola, tell us about our services</h1>-->
+<!--        <p>-->
+<!--            Tell us everything about our services and how we can improve them to keep you around-->
+<!--            longer.-->
+<!--        </p>-->
+<!---->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--        <img class="img-fluid" src="./images/contact-removebg-preview.png" alt="" />-->
+<!--    </div>-->
+<!--</header>-->
 
 <main class="container flex-col-center">
     <section class="row">
