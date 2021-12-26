@@ -45,7 +45,7 @@ class SiteController extends Controller
      */
     public function __construct()
     {
-        $this->registerMiddleWare(new AdminMiddleware(['dashboard']));
+        $this->registerMiddleWare(new AdminMiddleware(['dashboard','reservations']));
 //        $this->registerMiddleWare(new AuthMiddleware(['comment']));
     }
 
@@ -122,17 +122,20 @@ class SiteController extends Controller
         $menu = new Menu();
         $user= new User();
         $comments = new CommentForm();
+        $reservation = new ReservationForm();
 
         $menus = count($menu->fetchAll());
         $users = count($user::findAll());
         $comments = count($comments::findAll());
+        $reservations = count($reservation::findAll());
 
 
         $this->setLayout('admin');
         return $this->render('dashboard',[
             'users' => $users,
             'menus' => $menus,
-            'comments' => $comments
+            'comments' => $comments,
+            'reservations' => $reservations
         ]);
     }
 
@@ -163,6 +166,17 @@ class SiteController extends Controller
             return json_encode($reservation->errors);
         }
         return json_encode(true);
+    }
+
+    public function reservations()
+    {
+        $this->setLayout('admin');
+        $reservation = new ReservationForm();
+        $reservations = $reservation->fetchAll();
+        return $this->render('reservations', [
+            'reservations' => $reservations,
+            'model' => $reservation
+        ]);
     }
 
     public function cart(Request $request)
