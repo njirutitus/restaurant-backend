@@ -311,7 +311,13 @@ a:hover {
   box-sizing: border-box;
   border: 0.25rem solid goldenrod;
   border-radius: 0.5rem;
+  transition: ease-out 1s all;
 }
+
+/*.img-thumbnail:hover {*/
+/*  width: 400px;*/
+/*  height: 400px;*/
+/*}*/
 
 .row-content {
   margin: 0 auto;
@@ -450,19 +456,19 @@ footer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 
 .menu-item {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-width: 600px;
   box-sizing: border-box;
-  border: 1px solid grey;
   border-radius: 30px;
-  margin: 100px 10px 20px;
-
+  margin: 20px 5px;
+  background: #fff;
+  width: 200px;
+  justify-content: center;
 }
 
 .item-img {
@@ -470,7 +476,14 @@ footer {
   margin-right: auto;
   padding: 10px;
   position: relative;
-  margin-top: -100px;
+  border: transparent;
+  border-radius: 50%;
+}
+
+.menu-img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
 }
 
 .highlight-img {
@@ -483,8 +496,9 @@ footer {
 .item-description {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   padding: 10px;
-  width: 300px;
+  /*width: 300px;*/
   flex-grow: 1;
 }
 
@@ -526,6 +540,7 @@ h4 {
   line-height: 1.25;
   margin-bottom: 0.75rem;
   font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 .underline {
@@ -605,6 +620,7 @@ label {
 }
 
 .btn {
+  box-sizing: content-box;
   display: inline-block;
   position: relative;
   width: 10rem;
@@ -615,6 +631,12 @@ label {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   cursor: pointer;
+}
+
+.btn:hover {
+  background: transparent;
+  color: black;
+  border: 2px solid black;
 }
 
 .bg-primary {
@@ -876,4 +898,8 @@ label {
 .scrollableList {
   max-height: 300px;
   overflow-y: scroll;
+}
+.show {
+  display: block;
+  z-index: 9999;
 }
