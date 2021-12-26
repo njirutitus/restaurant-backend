@@ -3,6 +3,7 @@
  * @var $users
  * @var $menus
  * @var $comments
+ * @var $reservations
 */
 ?>
 
@@ -10,6 +11,7 @@
     <div class="highlights">
         <a href="/admin_users" class="btn">Users: <?php echo $users;?></a>
         <a href="/admin_dishes" class="btn">Dishes: <?php echo $menus;?></a>
+        <a href="/reservations" class="btn">Reservations: <?php echo $reservations;?></a>
         <button class="btn">Orders: 200</button>
         <button class="btn">Comments: <?php echo $comments;?></button>
     </div>
