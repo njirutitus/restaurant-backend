@@ -42,4 +42,9 @@ class ReservationForm extends DbModel
     {
         return parent::save();
     }
+
+    public function fetchAll()
+    {
+        return parent::findAll();
+    }
 }
