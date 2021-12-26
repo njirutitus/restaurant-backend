@@ -501,7 +501,7 @@ function displayMenuItems(menuItems) {
         <i class="far fa-star ms-2"></i>
       </div>
       <div class="item-footer">
-          <h3>KES ${item.price}</h3>
+          <h3>KES ${numberWithCommas(item.price)}</h3>
           ${icon}
       </div>
     </div>
