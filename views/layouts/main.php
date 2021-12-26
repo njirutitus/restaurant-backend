@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="./css/main.css" />
     <script src="https://unpkg.com/htmx.org@1.4.1"></script>
-    <script src="./js/9ad9a54963.js" crossorigin="anonymous"></script>
+    <script src="./assets/9ad9a54963.js" crossorigin="anonymous"></script>
 
     <title>Mama Fish Restaurant: <?php echo $this->title ?></title>
 </head>
@@ -149,8 +149,10 @@
     </div>
 </div>
 
-<script src="./js/menu.js"></script>
-<script src="./js/main.js"></script>
+<!--<script src="./js/menu.js"></script>-->
+<!--<script src="./js/main.js"></script>    -->
+<script type="module" src="./js/bundle.js"></script>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

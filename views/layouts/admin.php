@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/admin.css" />
 
-    <script src="../js/9ad9a54963.js" crossorigin="anonymous"></script>
+    <script src="../assets/9ad9a54963.js" crossorigin="anonymous"></script>
 
-    <title>Mama Fish Restaurant Administration</title>
+    <title><?php echo $this->title; ?></title>
 </head>
 <body>
 <div class="wrapper">
@@ -34,6 +34,9 @@
             <li>
                 <a href="/admin_dishes"><i class="fas fa-pizza-slice"></i> Dishes</a>
             </li>
+            <li>
+                <a href="/reservations"><i class="fas fa-pizza-slice"></i> Reservations</a>
+            </li>
 
             <?php if (\tn\phpmvc\Application::isSuperAdmin()):?>
             <li>
@@ -47,7 +50,7 @@
     </aside>
     <!-- Content-Wrapper -->
     <main class="content-wrapper" id="main-content">
-        <!-- Top bar -->
+        <!-- Start of Top bar -->
         <nav id="navbar" class="topbar">
             <button
                     id="sidebarToggleTop"
@@ -56,7 +59,7 @@
                 <i class="fa fa-bars"></i>
             </button>
             <div class="dropdown ml-auto">
-                <span class="link">Account <i class="fas fa-chevron-circle-down"></i> <!--<ion-icon name="chevron-down-outline" size="medium"></ion-icon> --></span>
+                <span class="link" id="accountToggle">Account <i class="fas fa-chevron-circle-down"></i> <!--<ion-icon name="chevron-down-outline" size="medium"></ion-icon> --></span>
                 <div class="dropdown-content">
                     <ul>
                         <li>
@@ -74,6 +77,8 @@
                 </div>
             </div>
         </nav>
+
+        <!--End of Top bar -->
 
         <div class="feedback">
             <?php if (\tn\phpmvc\Application::$app->session->getFlash('success')): ?>
@@ -108,7 +113,7 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="../js/main.js"></script>
+<script src="../js/bundle.js"></script>
 <script src="https://unpkg.com/htmx.org@1.5.0"></script>
 </body>
 </html>

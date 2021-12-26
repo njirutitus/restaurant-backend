@@ -16,7 +16,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="./css/main.css" />
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="./assets/font-awesome.js" crossorigin="anonymous"></script>
 
     <title>Mama Fish Restaurant: <?php echo $this->title ?></title>
 </head>
