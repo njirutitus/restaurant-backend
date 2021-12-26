@@ -893,6 +893,10 @@ label {
   .flex-row-space-evenly {
     justify-content: flex-start;
   }
+
+  .menu-items {
+    justify-content: center;
+  }
 }
 
 .scrollableList {
