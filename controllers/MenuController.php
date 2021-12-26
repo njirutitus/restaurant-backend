@@ -88,6 +88,39 @@ class MenuController extends Controller
         return $this->render('menu_view');
     }
 
+    /**
+     * @throws NotFoundException
+     */
+    public function dish_comments(Request $request, Response $response)
+    {
+        $this->setLayout('admin');
+        if ($request->isGet()) {
+            $data = $request->getBody();
+            if(!array_key_exists('id',$data)) {
+                $response->redirect('/admin_dishes');
+                exit();
+            }
+            $id = $data['id'];
+            $result = Menu::findOne(['id' => $id]);
+            $comments = CommentForm::findMany(['menu'=> $id],'date DESC');
+            $user = new User();
+            $users = $user::findAll();
+
+            if ($result)
+                return $this->render('comments',[
+                        'menuitem' => $result,
+                        'comments' => $comments,
+                        'users' => $users
+                    ]
+                );
+            else
+                throw new NotFoundException();
+
+        }
+        return $this->render('comments');
+    }
+
+
     public function menus()
     {
         $menu = new Menu();
@@ -107,7 +140,7 @@ class MenuController extends Controller
 
     }
 
-    public function delete_menu(Request $request)
+    public function delete_menu(Request $request): bool|string
     {
         if ($request->isGet()) {
             $data = $request->getBody();
