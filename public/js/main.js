@@ -28,6 +28,7 @@ const cartTotal = document.getElementById('cartTotal')
 const cartItemsContainer = document.getElementById('cartItems')
 const sectionCenter = document.querySelector(".menu-items");
 const btnContainer = document.querySelector(".btn-container");
+const orderForm = document.getElementById('orderForm')
 
 let cartProducts = [];
 let cart = []
@@ -78,7 +79,7 @@ function displayOrderItems()
       if(orderItemsContainer) {
         orderItemsContainer.innerHTML = orderItems.join("")
         document.getElementById('total').innerText = numberWithCommas(parseInt(subtotal + subtotal * 0.16))
-        document.getElementById('amount').value = numberWithCommas(parseInt(subtotal + subtotal * 0.16))
+        document.getElementById('amount').value = parseInt(subtotal + subtotal * 0.16)
       }
     })
   }
@@ -88,6 +89,46 @@ function displayOrderItems()
       ordersPage.innerHTML = `<div class="flex-col-center"><h4>No Item in the cart.</h4><a href="/menu" class="nav--button">Browse Menu</a></div>`
   }
 }
+
+
+if(orderForm)
+orderForm.addEventListener('submit',e => {
+  e.preventDefault()
+  const orderFormData = new FormData(e.currentTarget)
+  const data = {}
+  for (let [key,value] of orderFormData.entries()) {
+    data[key] = value
+    if(key === 'payment_method') continue
+    if(document.getElementById(key).classList.contains('is-invalid')) {
+      document.getElementById(key).classList.remove('is-invalid')
+      document.getElementById(key).nextElementSibling.innerHTML = ''
+    }
+  }
+  data['order_items'] = getSession('cart')
+  console.log(data)
+  const response = postData('/checkout',data)
+  response.then(dat => {
+    console.log(dat)
+    if(dat === true) {
+      removeSession('cart')
+      setSession('success','Order placed. proceed to payment ')
+      location.replace('/payment')
+    }
+  else {
+      if(typeof dat === "object") {
+        for (const [key, value] of Object.entries(dat)) {
+          document.getElementById(key).classList.add('is-invalid')
+          document.getElementById(key).nextElementSibling.innerHTML = value[0]
+          console.log(`${key}: ${value}`);
+        }
+      }
+      else {
+        setSession('error',dat)
+        showFeedBack()
+      }
+    }
+  })
+})
 
 function displayCartItems() {
   let items = [];
@@ -307,6 +348,41 @@ if(reservationForm)
     }
   })
 
+function loadComments(id) {
+  const commentsContainer = document.getElementById('comments')
+  let last_id
+  if(commentsContainer) {
+    fetchData(`/item_comments?id=${id}`)
+        .then(data => {
+          if (!data) {
+            commentsContainer.innerHTML = ''
+          } else {
+            const comments = data.map(comment => {
+              id = comment.id
+              return `<li id="comment-${comment.id}">
+             <div class="box">
+              <p>${comment.comment}</p>
+              <p>--${comment.author_name} ${comment.date}</p>
+              </div>
+              <p><button><i class="far fa-thumbs-up"></i> <span>0</span></button>
+              <button><i id="deleteComment" data-id="${id}" class="fas fa-trash-alt ms-2 text-error"></i></button></p>
+            </li>`
+            })
+            commentsContainer.innerHTML = comments.join('')
+          }
+        })
+
+    console.log(last_id)
+    var element = document.getElementById(`comment-${last_id}`);
+
+    element.scrollIntoView();
+    element.scrollIntoView(false);
+    element.scrollIntoView({block: "end"});
+    element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+
+  }
+}
+
 if(commentForm)
 commentForm.addEventListener('submit',(e) => {
   e.preventDefault();
@@ -328,8 +404,7 @@ commentForm.addEventListener('submit',(e) => {
           else {
             setSession('error', 'You must be logged in to comment.');
           }
-          window.location.replace(`/menuitem?id=${menuId}`);
-          showFeedBack()
+          loadComments(menuId);
         });
   }
 
@@ -572,6 +647,11 @@ function activeButton(id,filterButtons) {
 
 
 window.addEventListener('DOMContentLoaded',function (){
+
+  const menuitem_id = document.getElementById('menuitem_id')
+  if(menuitem_id){
+    loadComments(parseInt(menuitem_id.value))
+  }
   fetchData('/menuitems')
       .then(menu => {
         displayMenuItems(menu);
