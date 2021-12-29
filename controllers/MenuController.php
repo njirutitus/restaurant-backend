@@ -74,13 +74,28 @@ class MenuController extends Controller
             $user = new User();
             $users = $user::findAll();
 
-            if ($result)
-            return $this->render('menu_view',[
-                    'menuitem' => $result,
-                    'comments' => $comments,
-                    'users' => $users
-                ]
-            );
+            if ($result) {
+                $results = array();
+                $results['menuitem'] = $result;
+                $results['users'] = $users;
+
+                foreach ($comments as $comment) {
+                    $author = "";
+                    foreach ($users as $user) {
+                        if ($user->id == $comment->author) {
+                            $author = $user->firstname . " " . $user->lastname;
+                        }
+                    }
+                    $comment->author_name = $author;
+                }
+                $results['comments'] = $comments;
+                return $this->render('menu_view', [
+                        'menuitem' => $result,
+                        'comments' => $comments,
+                        'users' => $users
+                    ]
+                );
+            }
             else
                 throw new NotFoundException();
 
@@ -88,31 +103,62 @@ class MenuController extends Controller
         return $this->render('menu_view');
     }
 
+    public function item_comments(Request $request)
+    {
+        if ($request->isGet()) {
+            $data = $request->getBody();
+            if(!array_key_exists('id',$data)) {
+                return json_encode(false);
+            }
+            $id = $data['id'];
+            $comments = CommentForm::findMany(['menu'=> $id],'date ASC');
+            $user = new User();
+            $users = $user::findAll();
+
+            if ($comments) {
+                foreach ($comments as $comment) {
+                    $author = "";
+                    foreach ($users as $user) {
+                        if ($user->id == $comment->author) {
+                            $author = $user->firstname . " " . $user->lastname;
+                        }
+                    }
+                    $comment->author_name = $author;
+                }
+                return json_encode($comments);
+            }
+        }
+        return json_encode(false);
+    }
+
     /**
      * @throws NotFoundException
      */
+
+
     public function dish_comments(Request $request, Response $response)
     {
         $this->setLayout('admin');
         if ($request->isGet()) {
             $data = $request->getBody();
-            if(!array_key_exists('id',$data)) {
+            if (!array_key_exists('id', $data)) {
                 $response->redirect('/admin_dishes');
                 exit();
             }
             $id = $data['id'];
             $result = Menu::findOne(['id' => $id]);
-            $comments = CommentForm::findMany(['menu'=> $id],'date DESC');
+            $comments = CommentForm::findMany(['menu' => $id], 'date DESC');
             $user = new User();
             $users = $user::findAll();
 
-            if ($result)
-                return $this->render('comments',[
+            if ($result){
+                return $this->render('comments', [
                         'menuitem' => $result,
                         'comments' => $comments,
                         'users' => $users
                     ]
                 );
+            }
             else
                 throw new NotFoundException();
 
