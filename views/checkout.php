@@ -9,16 +9,16 @@ use tn\phpmvc\Application;
         <div class="col-6 box">
             <h2>Checkout</h2>
             <div class="underline-thin mb-3"></div>
-            <form action="" method="post" id="reservationForm">
+            <form action="" method="post" id="orderForm">
                 <div class="form-group row mb-3">
-                    <label class="col-3" for="reserved_by">Full Name</label>
-                    <input type="text" name="reserved_by" value="<?php echo !Application::isGuest() ? Application::$app->user->getDisplayName() : '' ?>" class="form-control col-6" id="reserved_by">
+                    <label class="col-3" for="ordered_by">Full Name</label>
+                    <input type="text" name="ordered_by" value="<?php echo !Application::isGuest() ? Application::$app->user->getDisplayName() : '' ?>" class="form-control col-6" id="ordered_by">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group row mb-3">
-                    <label class="col-3" for="date">Table Number</label>
-                    <input type="text" name="table" value="" class="form-control col-6" id="date">
+                    <label class="col-3" for="table_number">Table Number</label>
+                    <input type="text" name="table_number" value="" class="form-control col-6" id="table_number">
                     <div class="invalid-feedback"></div>
                 </div>
 
@@ -27,9 +27,19 @@ use tn\phpmvc\Application;
                     <input type="number" name="persons" min="1"  value="1" class="form-control col-6" id="persons">
                     <div class="invalid-feedback"></div>
                 </div>
+                <div class="form-group row mb-3 b">
+                    <span class="col-3" for="persons">Payment Method</span>
+                    <div>
+                        <label for="mpesa">Mpesa</label>
+                        <input type="radio" name="payment_method" value="mpesa" class="input-radio" id="mpesa" required>
+                        <label for="cash">Cash</label>
+                        <input type="radio" name="payment_method" value="cash" class="input-radio" id="cash">
+                    </div>
+                    <div class="invalid-feedback"></div>
+                </div>
                 <div class="form-group row mb-3">
-                    <label class="col-3" for="mpesa">Mpesa Number</label>
-                    <input type="number" name="mpesa" placeholder="254xxxxxxxxx" class="form-control col-6" id="mpesa">
+                    <label class="col-3" for="phone_number">Phone Number</label>
+                    <input type="number" name="phone_number" placeholder="254xxxxxxxxx" class="form-control col-6" id="phone_number">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group row mb-3">
@@ -58,8 +68,7 @@ use tn\phpmvc\Application;
                 <div class="order-items" id="orderItemsContainer">
                 </div>
                 <div class="flex-row-space-between">
-                    <span>Total </span>
-                    <span>Ksh. <span id="total"></span></span>
+                    <span>Total: Ksh. <span id="total"></span></span>
                 </div>
             </div>
         </div>
