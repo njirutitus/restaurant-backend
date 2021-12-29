@@ -296,7 +296,7 @@ a:hover {
   color: #fff;
 }
 
-.b {
+.bold {
   font-weight: bold;
 }
 
@@ -577,13 +577,14 @@ h4 {
 .box {
   /* border: 2px solid brown; */
   box-sizing: border-box;
-  padding: 3rem;
+  padding: .5rem;
   max-width: 600px;
   /* background: hsl(205, 100%, 96%); */
   background: rgba(44, 85, 112, 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  margin: 2rem 0;
+  margin: .5rem 0;
+  border-radius: 1rem;
 }
 
 .form-control {
@@ -593,6 +594,12 @@ h4 {
   font-size: 1em;
   border-color: transparent;
   min-width: 300px;
+}
+
+.input-radio {
+  min-height: 1rem;
+  border-color: transparent;
+  min-width: 30px;
 }
 
 .form-control:focus {
@@ -745,6 +752,14 @@ label {
   z-index: 5;
 }
 
+.alert{
+  min-height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .alert-success, .alert-error {
   color: #fff;
   /*border-color: #c3e6cb;*/
@@ -874,6 +889,11 @@ label {
 }
 
 @media screen and (max-width: 768px) {
+  .col-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .expand {
     display: none;
   }
