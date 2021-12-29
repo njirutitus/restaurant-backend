@@ -13,6 +13,8 @@ namespace app\controllers;
 
 use app\models\CommentForm;
 use app\models\Menu;
+use app\models\Order;
+use app\models\OrderItem;
 use app\models\ReservationForm;
 use app\models\User;
 use tn\phpmvc\Application;
@@ -203,9 +205,61 @@ class SiteController extends Controller
         return json_encode($items);
     }
 
-    public function checkout()
+    public function checkout(Request $request,Response $response)
     {
-        return $this->render('checkout');
+        $order = new Order();
+        $order_item = new OrderItem();
+        if ($request->isPost()) {
+            if(!Application::$app->session->get('user'))
+                return json_encode('You need to login first to place an order');
+            $data = $request->getBody();
+            $order_items = $data->order_items;
+            $order->ordered_by=  Application::$app->session->get('user');
+            $order->table_number=  $data->table_number;
+            $order->persons=  $data->persons;
+            $order->phone_number=  $data->phone_number;
+            $order->payment_method=  $data->payment_method;
+            $order->amount =  $data->amount;
+            if(!$order->validate()) {
+                return json_encode($order->errors);
+            }
+            try {
+                Application::$app->db->pdo->beginTransaction();
+                $order->add();
+                $order_id = Application::$app->db->pdo->lastInsertId();
+                $total = 0;
+                foreach ($order_items as $item) {
+                    $menu = new Menu();
+                    $order_item->item_id = $item->id;
+                    $order_item->quantity = $item->quantity;
+                    $item = $menu::findOne(['id' => $order_item->item_id]);
+                    $order_item->order_id = $order_id;
+                    $order_item->item_price = $item->price;
+                    if(!$order_item->validate()) {
+                        Application::$app->db->pdo->rollBack();
+                        return json_encode($order_item->errors);
+                    }
+                    $order_item->add();
+                    $total+=$item->price*$order_item->quantity;
+                }
+                $order->amount = $total;
+                $order->update(['id'=>$order_id]);
+                Application::$app->db->pdo->commit();
+                return json_encode(true);
+            }
+            catch (\Throwable $e) {
+                Application::$app->db->pdo->rollBack();
+                return json_encode($e->getMessage());
+            }
+        }
+        return $this->render('checkout',
+            ['model'=>$order]
+        );
+    }
+
+    public  function payment()
+    {
+        return $this->render('payment');
     }
 
     public function getFile(Request $request)
