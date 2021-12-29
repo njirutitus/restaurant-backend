@@ -29,28 +29,13 @@ $this->title = "Menu";
             echo '<img class="img-fluid" src="'.$img.'" alt="bugger" width="300" height="600">
             <h2>'.$menuitem->item_title.'</h2>
             <p>'.$menuitem->desc.'</p>
+            <input type="hidden" value="'.$menuitem->id.'" id="menuitem_id">
         </div>';
             ?>
         <div class="col-6">
             <h2>Comments</h2>
             <ul class="list-unstyled">
-                <div class="scrollableList">
-                <?php
-                    foreach ($comments as $comment) {
-                        $author = "";
-                        foreach ($users as $user) {
-                            if($user->id == $comment->author) {
-                                $author = $user->firstname." ".$user->lastname;
-                            }
-                        }
-                        echo "
-                        <li>
-                            <p>$comment->comment</p>
-                            <p>--$author $comment->date</p>
-                        </li>
-                        ";
-                    }
-                ?>
+                <div class="scrollableList" id="comments">
                 </div>
 
                 <li>
