@@ -16,6 +16,7 @@
         "vlucas/phpdotenv": "^5.3",
         "phpmailer/phpmailer": "^6.5",
         "ramsey/uuid" : "^4.2.1",
-      "ext-curl": "*"
+      "ext-curl": "*",
+        "safaricom/mpesa": "^1.0"
     }
 }
