@@ -53,6 +53,8 @@ $app->router->get('/cart-items',[SiteController::class,'cartItems']);
 $app->router->post('/cart-items',[SiteController::class,'cartItems']);
 $app->router->get('/checkout',[SiteController::class,'checkout']);
 $app->router->post('/checkout',[SiteController::class,'checkout']);
+$app->router->get('/payment',[SiteController::class,'payment']);
+$app->router->post('/payment',[SiteController::class,'payment']);
 
 $app->router->get('/register',[AuthController::class,'register']);
 $app->router->post('/register',[AuthController::class,'register']);
@@ -76,6 +78,7 @@ $app->router->get('/admin_dishes_delete',[MenuController::class,'delete_menu']);
 $app->router->get('/admin_dish_edit',[MenuController::class,'edit_menu']);
 $app->router->post('/admin_dish_edit',[MenuController::class,'edit_menu']);
 $app->router->get('/admin_dish_comments',[MenuController::class,'dish_comments']);
+$app->router->get('/item_comments',[MenuController::class,'item_comments']);
 
 $app->router->get('/admin_users',[AuthController::class,'users']);
 $app->router->get('/file',[SiteController::class,'getFile']);
