@@ -17,8 +17,10 @@ use app\models\Order;
 use app\models\OrderItem;
 use app\models\ReservationForm;
 use app\models\User;
+use Safaricom\Mpesa\Mpesa;
 use tn\phpmvc\Application;
 use tn\phpmvc\Controller;
+use tn\phpmvc\exception\NotFoundException;
 use tn\phpmvc\middlewares\AdminMiddleware;
 use tn\phpmvc\middlewares\AuthMiddleware;
 use tn\phpmvc\Request;
@@ -245,7 +247,7 @@ class SiteController extends Controller
                 $order->amount = $total;
                 $order->update(['id'=>$order_id]);
                 Application::$app->db->pdo->commit();
-                return json_encode(true);
+                return json_encode($order_id);
             }
             catch (\Throwable $e) {
                 Application::$app->db->pdo->rollBack();
@@ -257,9 +259,20 @@ class SiteController extends Controller
         );
     }
 
-    public  function payment()
+    public  function payment(Request $request)
     {
-        return $this->render('payment');
+        if($request->isGet()) {
+            $order = new Order();
+            $id = $request->getBody()['id'];
+            $order = $order::findOne(['id'=>$id]);
+            if($order)
+            return $this->render('payment',[
+                'order' => $order
+            ]);
+            else {
+                throw new NotFoundException();
+            }
+        }
     }
 
     public function getFile(Request $request)
