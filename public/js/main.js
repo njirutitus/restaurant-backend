@@ -105,14 +105,12 @@ orderForm.addEventListener('submit',e => {
     }
   }
   data['order_items'] = getSession('cart')
-  console.log(data)
   const response = postData('/checkout',data)
   response.then(dat => {
-    console.log(dat)
-    if(dat === true) {
+    if(typeof dat === "number" || typeof dat === "string") {
       removeSession('cart')
-      setSession('success','Order placed. proceed to payment ')
-      location.replace('/payment')
+      setSession('success',`Order Number ${dat} placed. proceed to payment`)
+      location.replace(`/payment?id=${dat}`)
     }
   else {
       if(typeof dat === "object") {
@@ -405,7 +403,8 @@ commentForm.addEventListener('submit',(e) => {
             setSession('error', 'You must be logged in to comment.');
           }
           loadComments(menuId);
-        });
+        })
+    showFeedBack()
   }
 
 })
