@@ -1,13 +1,16 @@
 <?php
+/** @var $order Order */
+
+use app\models\Order;
 use tn\phpmvc\Application;
 ?>
 <!-- About us main Section-->
 <main class="container flex-col-center">
     <h1>Make a Payment</h1>
     <div class="underline"></div>
-    <div class="row orders">
+    <div class="row">
         <div class="col-6 box">
-            <h2>Payment for order no 283</h2>
+            <h2>Payment for order no <?php echo $order->id; ?></h2>
             <div class="underline-thin mb-3"></div>
             <form action="" method="post" id="paymentForm">
                 <div class="form-group row mb-3 b">
@@ -27,7 +30,7 @@ use tn\phpmvc\Application;
                 </div>
                 <div class="form-group row mb-3">
                     <label class="col-3" for="amount">Amount to Pay</label>
-                    <input type="text" name="amount" class="form-control col-6" id="amount">
+                    <input type="text" name="amount" class="form-control col-6" id="amount" value="<?php echo $order->amount ?>">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-control row">
